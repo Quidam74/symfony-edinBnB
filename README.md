@@ -6,7 +6,9 @@ Create entity
 ``` bash
 php bin/console make:entity
 # Create new migration after each modification of the DB.
-php bin/console make:migration
+php bin/console doctrine:migrations:diff
+# Update database schema
+php bin/console doctrine:migrations:migrate
 ```
 
 Doctrine
