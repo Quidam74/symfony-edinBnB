@@ -26,6 +26,12 @@ class Photo
      */
     private $url;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Bien")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $bien;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -54,4 +60,17 @@ class Photo
 
         return $this;
     }
+
+    public function getBien(): ?Bien
+    {
+        return $this->bien;
+    }
+
+    public function setBien(?Bien $bien): self
+    {
+        $this->bien = $bien;
+
+        return $this;
+    }
+
 }

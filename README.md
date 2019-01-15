@@ -18,3 +18,8 @@ php bin/console doctrine:database:create
 # Load table in database
 php bin/console doctrine:migrations:migrate
 ```
+
+For generate/re-generate entity's accessors
+``` bash
+php bin/console  make:entity --regenerate
+```
