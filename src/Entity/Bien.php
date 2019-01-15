@@ -53,6 +53,11 @@ class Bien
      */
     private $photos;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Adresse", cascade={"persist"})
+     */
+    private $adresse;
+
     public function __construct()
     {
         $this->photos = new ArrayCollection();
@@ -162,6 +167,18 @@ class Bien
                 $photo->setBien(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAdresse(): ?Adresse
+    {
+        return $this->adresse;
+    }
+
+    public function setAdresse(?Adresse $adresse): self
+    {
+        $this->adresse = $adresse;
 
         return $this;
     }
