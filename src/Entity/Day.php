@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\EquipementRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\DayRepository")
  */
-class Equipement
+class Day
 {
     /**
      * @ORM\Id()
@@ -17,24 +17,25 @@ class Equipement
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="date")
      */
-    private $libelle;
+    private $day;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getLibelle(): ?string
+    public function getDay(): ?\DateTimeInterface
     {
-        return $this->libelle;
+        return $this->day;
     }
 
-    public function setLibelle(string $libelle): self
+    public function setDay(\DateTimeInterface $day): self
     {
-        $this->libelle = $libelle;
+        $this->day = $day;
 
         return $this;
     }
+
 }
