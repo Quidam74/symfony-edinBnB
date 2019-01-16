@@ -8,7 +8,7 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Bien;
+use App\Entity\Property;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
@@ -16,14 +16,14 @@ class BienFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-         $bien = new Bien();
+         $bien = new Property();
 
-         $bien->setNbLit(4);
+         $bien->setBedCount(4);
          $bien->setDescription("Freshly decorated spacious home with garden.");
-         $bien->setNbChambre(2);
-         $bien->setNbPersonne(5);
-         $bien->setNbSalleDeBain(1);
-         $bien->setPrix(58);
+         $bien->setBedRoomCount(2);
+         $bien->setPersonCount(5);
+         $bien->setBathRoomCount(1);
+         $bien->setPrice(58);
          $manager->persist($bien);
 
         $manager->flush();

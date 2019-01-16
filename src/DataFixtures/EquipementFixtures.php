@@ -9,7 +9,7 @@
 namespace App\DataFixtures;
 
 
-use App\Entity\Equipement;
+use App\Entity\Equipment;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
@@ -18,13 +18,17 @@ class EquipementFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        $equipement = new Equipement();
+        $equipement = new Equipment();
 
-        $equipement->setLibelle("wi-Fi");
+        $equipement->setDescription("wi-Fi");
         $manager->persist($equipement);
-        $equipement->setLibelle("Cheminée");
+
+        $manager->flush();
+        $equipement->setDescription("Cheminée");
         $manager->persist($equipement);
-        $equipement->setLibelle("Sèche-linge");
+
+        $manager->flush();
+        $equipement->setDescription("Sèche-linge");
         $manager->persist($equipement);
 
         $manager->flush();

@@ -9,7 +9,7 @@
 namespace App\DataFixtures;
 
 
-use App\Entity\Adresse;
+use App\Entity\Address;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
@@ -17,15 +17,13 @@ class AdresseFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        $adresse = new Adresse();
+        $adresse = new Address();
 
-        $adresse->setCodePostale("74960");
-        $adresse->setPays("France");
-        $adresse->setVille("Mégevette");
+        $adresse->setPostCode("74960");
+        $adresse->setCountry("France");
+        $adresse->setCity("Mégevette");
         $adresse->setComplement("118 Impasse du grand pre");
-
         $manager->persist($adresse);
-
         $manager->flush();
     }
 

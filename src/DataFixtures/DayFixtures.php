@@ -8,12 +8,12 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Jour;
+use App\Entity\Day;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
 
-class JourFixtures extends Fixture
+class DayFixtures extends Fixture
 {
 
 
@@ -22,10 +22,9 @@ class JourFixtures extends Fixture
         $day = new \DateTime("01-01-2019");
 
         for ($i = 1; $i <= 365; $i++) {
-
             $day->modify("+1 day");
-            $jour = new Jour();
-            $jour->setJour($day);
+            $jour = new Day();
+            $jour->setDay($day);
             $manager->persist($jour);
             $manager->flush();
         }
