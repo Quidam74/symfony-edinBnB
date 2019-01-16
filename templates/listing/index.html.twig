@@ -6,16 +6,23 @@
     <section class="listing">
 
         {% for Propertie in Properties %}
-            <article class="listing-propertie">
-                <h1 class="propertie-title">{{ Propertie.address.city~" :  "~ Propertie.address.complement}}</h1>
+            <article class="propertie">
+                <h1 class="propertie-title">{{ Propertie.address.city~" :  "~ Propertie.address.complement }}</h1>
+                <img class="propertie-img"
+                     src="https://static.wamiz.fr/images/articles/facebook/article/chiot-fb-593feaf4e2a87.jpg">
+
                 <p class="propertie-description">{{ Propertie.description }}</p>
-                <ul class="propertie-carac">
-                    <li class="carac-personne"> nombre de personne : <span>{{ Propertie.personCount }}</span></li>
-                    <li class="carac-bedRoom"> nombre de chambre : <span>{{ Propertie.bedRoomCount }}</span></li>
-                    <li class="carac-bed"> nombre de lit : <span>{{ Propertie.bedCount }}</span></li>
-                    <li class="carac-bathRoom"> nombre de salle de bain : <span>{{ Propertie.bathRoomCount }}</span></li>
+
+                <p class="propertie-introduceEquipement">les différents équipements :</pclas>
+                <ul class="carac">
+                    <li class="carac-elem carac-personne"> nombre de personne : <span>{{ Propertie.personCount }}</span>
+                    </li>
+                    <li class="carac-elem carac-bedRoom"> nombre de chambre : <span>{{ Propertie.bedRoomCount }}</span>
+                    </li>
+                    <li class="carac-elem carac-bed"> nombre de lit : <span>{{ Propertie.bedCount }}</span></li>
+                    <li class="carac-elem carac-bathRoom"> nombre de salle de bain :
+                        <span>{{ Propertie.bathRoomCount }}</span></li>
                 </ul>
-                <img class="propertie-img" src="">
 
                 <div class="propertie-button">Reserver</div>
             </article>
