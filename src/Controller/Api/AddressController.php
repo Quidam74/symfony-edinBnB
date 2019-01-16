@@ -74,9 +74,32 @@ class AddressController extends AbstractController
     /**
      * @Route("/api/address/{addressId}", methods={ "PUT" }, requirements={"addressId"="\d+"})
      */
-    public function updateAddress($addressId)
+    public function updateAddress(Request $request, $addressId)
     {
-        return "Not implemented yet.";
+        $repository = $this->getDoctrine()->getRepository(Address::class);
+
+        $address = $repository->find($addressId);
+
+        $manager = $this->getDoctrine()->getManager();
+        $data = json_decode($request->getContent(), true);
+
+        $form = $this->createForm(AddressType::class, $address, array("csrf_protection" => false));
+        $form->handleRequest($request)
+             ->submit($data);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($address);
+            $manager->flush();
+
+            $serializer = $this->container->get('serializer');
+            $reports = $serializer->serialize($address, 'json');
+
+            return new Response($reports);
+        }
+
+        $response = new JsonResponse(array("message" => "Attribute(s) missing !"));
+        $response->setStatusCode(400);
+        return $response;
     }
 
     /**
@@ -91,6 +114,6 @@ class AddressController extends AbstractController
         $manager->remove($address);
         $manager->flush();
 
-        return new JsonResponse(array("message" => "Succefully deleted."));
+        return new JsonResponse(array("message" => "Successfully deleted."));
     }
 }
