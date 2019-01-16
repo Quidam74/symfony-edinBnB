@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\AdresseRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\AddressRepository")
  */
-class Adresse
+class Address
 {
     /**
      * @ORM\Id()
@@ -19,17 +19,17 @@ class Adresse
     /**
      * @ORM\Column(type="string", length=60)
      */
-    private $pays;
+    private $country;
 
     /**
      * @ORM\Column(type="string", length=60)
      */
-    private $ville;
+    private $city;
 
     /**
      * @ORM\Column(type="string", length=60)
      */
-    private $codePostale;
+    private $postCode;
 
     /**
      * @ORM\Column(type="string", length=150)
@@ -41,38 +41,38 @@ class Adresse
         return $this->id;
     }
 
-    public function getPays(): ?string
+    public function getCountry(): ?string
     {
-        return $this->pays;
+        return $this->country;
     }
 
-    public function setPays(string $pays): self
+    public function setCountry(string $country): self
     {
-        $this->pays = $pays;
+        $this->country = $country;
 
         return $this;
     }
 
-    public function getVille(): ?string
+    public function getCity(): ?string
     {
-        return $this->ville;
+        return $this->city;
     }
 
-    public function setVille(string $ville): self
+    public function setCity(string $city): self
     {
-        $this->ville = $ville;
+        $this->city = $city;
 
         return $this;
     }
 
-    public function getCodePostale(): ?string
+    public function getPostCode(): ?string
     {
-        return $this->codePostale;
+        return $this->postCode;
     }
 
-    public function setCodePostale(string $codePostale): self
+    public function setPostCode(string $postCode): self
     {
-        $this->codePostale = $codePostale;
+        $this->postCode = $postCode;
 
         return $this;
     }
@@ -88,4 +88,5 @@ class Adresse
 
         return $this;
     }
+
 }

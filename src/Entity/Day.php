@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\JourRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\DayRepository")
  */
-class Jour
+class Day
 {
     /**
      * @ORM\Id()
@@ -19,22 +19,23 @@ class Jour
     /**
      * @ORM\Column(type="date")
      */
-    private $jour;
+    private $day;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getJour(): ?\DateTimeInterface
+    public function getDay(): ?\DateTimeInterface
     {
-        return $this->jour;
+        return $this->day;
     }
 
-    public function setJour(\DateTimeInterface $jour): self
+    public function setDay(\DateTimeInterface $day): self
     {
-        $this->jour = $jour;
+        $this->day = $day;
 
         return $this;
     }
+
 }
