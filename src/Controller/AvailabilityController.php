@@ -30,23 +30,23 @@ class AvailabilityController extends AbstractController
     }
 
     /**
-     * @Route("/api/availability/{availabilityId}", methods={ "GET" }, requirements={"addressId"="\d+"})
+     * @Route("/api/availability/{availabilityId}", methods={ "GET" }, requirements={"availabilityId"="\d+"})
      */
-    public function readAvailability($addressId) {
+    public function readAvailability($availabilityId) {
         return "Not implemented yet.";
     }
 
     /**
-     * @Route("/api/availability/{availabilityId}", methods={ "PUT" }, requirements={"addressId"="\d+"})
+     * @Route("/api/availability/{availabilityId}", methods={ "PUT" }, requirements={"availabilityId"="\d+"})
      */
-    public function updateAvailability($addressId) {
+    public function updateAvailability($availabilityId) {
         return "Not implemented yet.";
     }
 
     /**
-     * @Route("/api/availability/{availabilityId}", methods={ "DELETE" }, requirements={"addressId"="\d+"})
+     * @Route("/api/availability/{availabilityId}", methods={ "DELETE" }, requirements={"availabilityId"="\d+"})
      */
-    public function deleteAvailability($addressId) {
+    public function deleteAvailability($availabilityId) {
         return "Not implemented yet.";
     }
 }
