@@ -21,6 +21,7 @@ class AddressController extends AbstractController
 
         $addresses = $repository->findAll();
 
+        // Parse Object to jsonString.
         $serializer = $this->container->get('serializer');
         $reports = $serializer->serialize($addresses, 'json');
 
@@ -35,22 +36,27 @@ class AddressController extends AbstractController
         $address = new Address();
 
         $manager = $this->getDoctrine()->getManager();
+        // Get the data of request.
         $data = json_decode($request->getContent(), true);
 
+        // Create form without csrf protection.
         $form = $this->createForm(AddressType::class, $address, array("csrf_protection" => false));
         $form->handleRequest($request)
             ->submit($data);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // If the request is valide, save the new Address.
             $manager->persist($address);
             $manager->flush();
 
             $serializer = $this->container->get('serializer');
             $reports = $serializer->serialize($address, 'json');
 
+            // Return the created Address.
             return new Response($reports);
         }
 
+        // Else return an error.
         $response = new JsonResponse(array("message" => "Attribute(s) missing !"));
         $response->setStatusCode(400);
         return $response;
@@ -63,8 +69,10 @@ class AddressController extends AbstractController
     {
         $repository = $this->getDoctrine()->getRepository(Address::class);
 
+        // Find the Address with id $addressId.
         $address = $repository->find($addressId);
 
+        // Parse Object to jsonString.
         $serializer = $this->container->get('serializer');
         $reports = $serializer->serialize($address, 'json');
 
@@ -77,26 +85,32 @@ class AddressController extends AbstractController
     public function updateAddress(Request $request, $addressId)
     {
         $repository = $this->getDoctrine()->getRepository(Address::class);
-
+        // Find the Address with id $addressId.
         $address = $repository->find($addressId);
 
         $manager = $this->getDoctrine()->getManager();
+        // Get the data of request.
         $data = json_decode($request->getContent(), true);
 
         $form = $this->createForm(AddressType::class, $address, array("csrf_protection" => false));
         $form->handleRequest($request)
              ->submit($data);
 
+        // Create form without csrf protection.
         if ($form->isSubmitted() && $form->isValid()) {
+            // If the request is valide, save the new Address.
             $manager->persist($address);
             $manager->flush();
 
+            // Parse Object to jsonString.
             $serializer = $this->container->get('serializer');
             $reports = $serializer->serialize($address, 'json');
 
+            // Return the created Address.
             return new Response($reports);
         }
 
+        // Else return an error.
         $response = new JsonResponse(array("message" => "Attribute(s) missing !"));
         $response->setStatusCode(400);
         return $response;
@@ -109,8 +123,10 @@ class AddressController extends AbstractController
     {
         $manager = $this->getDoctrine()->getManager();
         $repository = $this->getDoctrine()->getRepository(Address::class);
-
+        // Find the Address with id $addressId.
         $address = $repository->find($addressId);
+
+        // Remove the Address.
         $manager->remove($address);
         $manager->flush();
 
