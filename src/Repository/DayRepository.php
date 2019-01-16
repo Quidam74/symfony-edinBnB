@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Disponibiliter;
+use App\Entity\Day;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method Disponibiliter|null find($id, $lockMode = null, $lockVersion = null)
- * @method Disponibiliter|null findOneBy(array $criteria, array $orderBy = null)
- * @method Disponibiliter[]    findAll()
- * @method Disponibiliter[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Day|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Day|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Day[]    findAll()
+ * @method Day[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class DisponibiliterRepository extends ServiceEntityRepository
+class DayRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, Disponibiliter::class);
+        parent::__construct($registry, Day::class);
     }
 
     // /**
-    //  * @return Disponibiliter[] Returns an array of Disponibiliter objects
+    //  * @return Day[] Returns an array of Day objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class DisponibiliterRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Disponibiliter
+    public function findOneBySomeField($value): ?Day
     {
         return $this->createQueryBuilder('d')
             ->andWhere('d.exampleField = :val')
