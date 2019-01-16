@@ -5,21 +5,19 @@
 {% block body %}
     <section>
 
-        {% for room in listingData %}
-
+        {% for Propertie in Properties %}
             <article>
-                <p>{{ room.description }}</p>
+                <h1>{{ Propertie.address.city~" :  "~ Propertie.address.complement}}</h1>
+                <p>{{ Propertie.description }}</p>
                 <ul>
-                    <li> nombre de personne : <span>{{ room.personCount }}</span></li>
-                    <li> nombre de chambre : <span>{{ room.bedRoomCount }}</span></li>
-                    <li> nombre de lit : <span>{{ room.bedCount }}</span></li>
-                    <li> nombre de salle de bain : <span>{{ room.bathRoomCount }}</span></li>
+                    <li> nombre de personne : <span>{{ Propertie.personCount }}</span></li>
+                    <li> nombre de chambre : <span>{{ Propertie.bedRoomCount }}</span></li>
+                    <li> nombre de lit : <span>{{ Propertie.bedCount }}</span></li>
+                    <li> nombre de salle de bain : <span>{{ Propertie.bathRoomCount }}</span></li>
                 </ul>
                 <img src="">
 
                 <div>Reserver</div>
-
-
             </article>
         {% endfor %}
     </section>

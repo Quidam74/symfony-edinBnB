@@ -54,7 +54,7 @@ class Property
     private $pictures;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Address", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Address", cascade={"persist"}, fetch="EAGER")
      */
     private $address;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\web;
 
 use App\Entity\Property;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,12 +15,12 @@ class ListingController extends AbstractController
     {
 
         $repository = $this->getDoctrine()->getRepository(Property::class);
-        $PlacesToSleep = $repository->findAll();
+        $Properties = $repository->findAll();
 
 
         return $this->render('listing/index.html.twig', [
             'controller_name' => 'ListingController',
-            'listingData' => $PlacesToSleep,
+            'Properties' => $Properties,
         ]);
     }
 }
