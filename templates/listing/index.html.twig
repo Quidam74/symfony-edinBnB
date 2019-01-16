@@ -3,21 +3,21 @@
 {% block title %}Réserver{% endblock %}
 
 {% block body %}
-    <section>
+    <section class="listing">
 
         {% for Propertie in Properties %}
-            <article>
-                <h1>{{ Propertie.address.city~" :  "~ Propertie.address.complement}}</h1>
-                <p>{{ Propertie.description }}</p>
-                <ul>
-                    <li> nombre de personne : <span>{{ Propertie.personCount }}</span></li>
-                    <li> nombre de chambre : <span>{{ Propertie.bedRoomCount }}</span></li>
-                    <li> nombre de lit : <span>{{ Propertie.bedCount }}</span></li>
-                    <li> nombre de salle de bain : <span>{{ Propertie.bathRoomCount }}</span></li>
+            <article class="listing-propertie">
+                <h1 class="propertie-title">{{ Propertie.address.city~" :  "~ Propertie.address.complement}}</h1>
+                <p class="propertie-description">{{ Propertie.description }}</p>
+                <ul class="propertie-carac">
+                    <li class="carac-personne"> nombre de personne : <span>{{ Propertie.personCount }}</span></li>
+                    <li class="carac-bedRoom"> nombre de chambre : <span>{{ Propertie.bedRoomCount }}</span></li>
+                    <li class="carac-bed"> nombre de lit : <span>{{ Propertie.bedCount }}</span></li>
+                    <li class="carac-bathRoom"> nombre de salle de bain : <span>{{ Propertie.bathRoomCount }}</span></li>
                 </ul>
-                <img src="">
+                <img class="propertie-img" src="">
 
-                <div>Reserver</div>
+                <div class="propertie-button">Reserver</div>
             </article>
         {% endfor %}
     </section>

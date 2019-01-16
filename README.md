@@ -29,5 +29,5 @@ php bin/console doctrine:migrations:migrate
 For generate/re-generate entity's accessors
 ``` bash
 php bin/console  make:entity --regenerate
-pbc cache:clear
+php bin/console cache:clear
 ```

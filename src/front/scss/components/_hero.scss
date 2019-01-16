@@ -1,0 +1,39 @@
+.hero {
+
+
+  &-personnalData {
+    background-color: white;
+    display: none;
+  }
+
+  &-objective {
+    background-color: white;
+    margin: auto;
+    margin-bottom: 40px;
+    margin-right: 0;
+
+    .hero-objectiveBloc {
+      display: flex;
+      flex-direction: row;
+      .hero-objectiveIMG
+      {
+        flex: none;
+      }
+      .hero-objectiveText{
+        display: flex;
+        padding: 20px;
+      }
+      .hero-objectiveText .hero-objectiveTextBlock{
+        margin: auto;
+        margin-bottom: 0px;
+      }
+      p {
+        margin: 15px;
+      }
+    }
+  }
+
+  .page-next {
+    margin: 0px;
+  }
+}
