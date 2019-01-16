@@ -34,7 +34,7 @@ class User
     private $email;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="date")
      */
     private $dateOfBirth;
 
@@ -54,24 +54,24 @@ class User
     private $isTraveler;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Adresse", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Address", cascade={"persist"})
      */
-    private $adresse;
+    private $address;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Voyage", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="App\Entity\Travel", mappedBy="user")
      */
-    private $voyages;
+    private $travels;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Bien", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="App\Entity\Property", mappedBy="user")
      */
-    private $biens;
+    private $properties;
 
     public function __construct()
     {
-        $this->voyages = new ArrayCollection();
-        $this->biens = new ArrayCollection();
+        $this->travels = new ArrayCollection();
+        $this->properties = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -163,43 +163,43 @@ class User
         return $this;
     }
 
-    public function getAdresse(): ?Adresse
+    public function getAddress(): ?Address
     {
-        return $this->adresse;
+        return $this->address;
     }
 
-    public function setAdresse(?Adresse $adresse): self
+    public function setAddress(?Address $address): self
     {
-        $this->adresse = $adresse;
+        $this->address = $address;
 
         return $this;
     }
 
     /**
-     * @return Collection|Voyage[]
+     * @return Collection|Travel[]
      */
-    public function getVoyages(): Collection
+    public function getTravels(): Collection
     {
-        return $this->voyages;
+        return $this->travels;
     }
 
-    public function addVoyage(Voyage $voyage): self
+    public function addTravel(Travel $travel): self
     {
-        if (!$this->voyages->contains($voyage)) {
-            $this->voyages[] = $voyage;
-            $voyage->setUser($this);
+        if (!$this->travels->contains($travel)) {
+            $this->travels[] = $travel;
+            $travel->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeVoyage(Voyage $voyage): self
+    public function removeTravel(Travel $travel): self
     {
-        if ($this->voyages->contains($voyage)) {
-            $this->voyages->removeElement($voyage);
+        if ($this->travels->contains($travel)) {
+            $this->travels->removeElement($travel);
             // set the owning side to null (unless already changed)
-            if ($voyage->getUser() === $this) {
-                $voyage->setUser(null);
+            if ($travel->getUser() === $this) {
+                $travel->setUser(null);
             }
         }
 
@@ -207,33 +207,34 @@ class User
     }
 
     /**
-     * @return Collection|Bien[]
+     * @return Collection|Property[]
      */
-    public function getBiens(): Collection
+    public function getProperties(): Collection
     {
-        return $this->biens;
+        return $this->properties;
     }
 
-    public function addBien(Bien $bien): self
+    public function addProperty(Property $property): self
     {
-        if (!$this->biens->contains($bien)) {
-            $this->biens[] = $bien;
-            $bien->setUser($this);
+        if (!$this->properties->contains($property)) {
+            $this->properties[] = $property;
+            $property->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeBien(Bien $bien): self
+    public function removeProperty(Property $property): self
     {
-        if ($this->biens->contains($bien)) {
-            $this->biens->removeElement($bien);
+        if ($this->properties->contains($property)) {
+            $this->properties->removeElement($property);
             // set the owning side to null (unless already changed)
-            if ($bien->getUser() === $this) {
-                $bien->setUser(null);
+            if ($property->getUser() === $this) {
+                $property->setUser(null);
             }
         }
 
         return $this;
     }
+
 }

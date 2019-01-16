@@ -7,9 +7,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\VoyageRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\TravelRepository")
  */
-class Voyage
+class Travel
 {
     /**
      * @ORM\Id()
@@ -19,9 +19,9 @@ class Voyage
     private $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Jour", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="App\Entity\Day", cascade={"persist"})
      */
-    private $jours;
+    private $days;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
@@ -31,7 +31,7 @@ class Voyage
 
     public function __construct()
     {
-        $this->jours = new ArrayCollection();
+        $this->days = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -40,26 +40,26 @@ class Voyage
     }
 
     /**
-     * @return Collection|Jour[]
+     * @return Collection|Day[]
      */
-    public function getJours(): Collection
+    public function getDays(): Collection
     {
-        return $this->jours;
+        return $this->days;
     }
 
-    public function addJour(Jour $jour): self
+    public function addDay(Day $day): self
     {
-        if (!$this->jours->contains($jour)) {
-            $this->jours[] = $jour;
+        if (!$this->days->contains($day)) {
+            $this->days[] = $day;
         }
 
         return $this;
     }
 
-    public function removeJour(Jour $jour): self
+    public function removeDay(Day $day): self
     {
-        if ($this->jours->contains($jour)) {
-            $this->jours->removeElement($jour);
+        if ($this->days->contains($day)) {
+            $this->days->removeElement($day);
         }
 
         return $this;
@@ -76,4 +76,5 @@ class Voyage
 
         return $this;
     }
+
 }

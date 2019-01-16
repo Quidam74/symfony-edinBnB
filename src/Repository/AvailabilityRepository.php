@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Adresse;
+use App\Entity\Availability;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method Adresse|null find($id, $lockMode = null, $lockVersion = null)
- * @method Adresse|null findOneBy(array $criteria, array $orderBy = null)
- * @method Adresse[]    findAll()
- * @method Adresse[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Availability|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Availability|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Availability[]    findAll()
+ * @method Availability[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class AdresseRepository extends ServiceEntityRepository
+class AvailabilityRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, Adresse::class);
+        parent::__construct($registry, Availability::class);
     }
 
     // /**
-    //  * @return Adresse[] Returns an array of Adresse objects
+    //  * @return Availability[] Returns an array of Availability objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class AdresseRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Adresse
+    public function findOneBySomeField($value): ?Availability
     {
         return $this->createQueryBuilder('a')
             ->andWhere('a.exampleField = :val')

@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\PhotoRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\PictureRepository")
  */
-class Photo
+class Picture
 {
     /**
      * @ORM\Id()
@@ -27,10 +27,10 @@ class Photo
     private $url;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Bien")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Property")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $bien;
+    private $property;
 
     public function getId(): ?int
     {
@@ -61,14 +61,14 @@ class Photo
         return $this;
     }
 
-    public function getBien(): ?Bien
+    public function getProperty(): ?Property
     {
-        return $this->bien;
+        return $this->property;
     }
 
-    public function setBien(?Bien $bien): self
+    public function setProperty(?Property $property): self
     {
-        $this->bien = $bien;
+        $this->property = $property;
 
         return $this;
     }
