@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réserver{% endblock %}
+
+{% block body %}
+    <section>
+
+        {% for room in listingData %}
+
+            <article>
+                <p>{{ room.description }}</p>
+                <ul>
+                    <li> nombre de personne : <span>{{ room.personCount }}</span></li>
+                    <li> nombre de chambre : <span>{{ room.bedRoomCount }}</span></li>
+                    <li> nombre de lit : <span>{{ room.bedCount }}</span></li>
+                    <li> nombre de salle de bain : <span>{{ room.bathRoomCount }}</span></li>
+                </ul>
+                <img src="">
+
+                <div>Reserver</div>
+
+
+            </article>
+        {% endfor %}
+    </section>
+{% endblock %}
