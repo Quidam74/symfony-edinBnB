@@ -23,6 +23,12 @@ class Voyage
      */
     private $jours;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
     public function __construct()
     {
         $this->jours = new ArrayCollection();
@@ -55,6 +61,18 @@ class Voyage
         if ($this->jours->contains($jour)) {
             $this->jours->removeElement($jour);
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
