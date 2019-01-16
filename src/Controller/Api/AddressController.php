@@ -61,7 +61,14 @@ class AddressController extends AbstractController
      */
     public function readAddress($addressId)
     {
-        return "Not implemented yet.";
+        $repository = $this->getDoctrine()->getRepository(Address::class);
+
+        $addresses = $repository->find($addressId);
+
+        $serializer = $this->container->get('serializer');
+        $reports = $serializer->serialize($addresses, 'json');
+
+        return new Response($reports);
     }
 
     /**
