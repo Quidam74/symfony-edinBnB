@@ -4,6 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Address;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Config\Definition\Exception\Exception;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -26,8 +29,30 @@ class AddressController extends AbstractController
     /**
      * @Route("/api/addresses", methods={ "POST" })
      */
-    public function createAddress() {
-        return "Not implemented yet.";
+    public function createAddress(Request $request) {
+        $body = $request->request;
+        $manager = $this->getDoctrine()->getManager();
+
+        try {
+            // Create the new Address.
+            $address = new Address();
+            $address->setCity($body->get("city", null));
+            $address->setComplement($body->get("complement", null));
+            $address->setCountry($body->get("country", null));
+            $address->setPostCode($body->get("postCode", null));
+
+            $manager->persist($address);
+            $manager->flush();
+
+            // Parse the created object in JSON.
+            $serializer = $this->container->get('serializer');
+            $reports = $serializer->serialize($address, 'json');
+
+            return new Response($reports);
+        } catch (\TypeError $ex) {
+            // Catch TypeError for avoid request with messing attribute(s).
+            return new JsonResponse(array("status" => 400, "message" => "Attribute(s) missing !"));
+        }
     }
 
     /**
