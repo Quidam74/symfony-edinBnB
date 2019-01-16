@@ -21,6 +21,11 @@ class Disponibiliter
      */
     private $estDisponible;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Jour", cascade={"persist"})
+     */
+    private $jour;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -34,6 +39,18 @@ class Disponibiliter
     public function setEstDisponible(bool $estDisponible): self
     {
         $this->estDisponible = $estDisponible;
+
+        return $this;
+    }
+
+    public function getJour(): ?Jour
+    {
+        return $this->jour;
+    }
+
+    public function setJour(?Jour $jour): self
+    {
+        $this->jour = $jour;
 
         return $this;
     }
