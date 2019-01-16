@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Availability;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Response;
 
 class AvailabilityController extends AbstractController
 {
