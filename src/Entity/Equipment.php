@@ -23,7 +23,7 @@ class Equipment
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Property")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $property;
 
