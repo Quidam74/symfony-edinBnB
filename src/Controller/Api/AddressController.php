@@ -63,10 +63,10 @@ class AddressController extends AbstractController
     {
         $repository = $this->getDoctrine()->getRepository(Address::class);
 
-        $addresses = $repository->find($addressId);
+        $address = $repository->find($addressId);
 
         $serializer = $this->container->get('serializer');
-        $reports = $serializer->serialize($addresses, 'json');
+        $reports = $serializer->serialize($address, 'json');
 
         return new Response($reports);
     }
@@ -84,6 +84,13 @@ class AddressController extends AbstractController
      */
     public function deleteAddress($addressId)
     {
-        return "Not implemented yet.";
+        $manager = $this->getDoctrine()->getManager();
+        $repository = $this->getDoctrine()->getRepository(Address::class);
+
+        $address = $repository->find($addressId);
+        $manager->remove($address);
+        $manager->flush();
+
+        return new JsonResponse(array("message" => "Succefully deleted."));
     }
 }
