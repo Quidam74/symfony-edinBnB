@@ -63,10 +63,16 @@ class Bien
      */
     private $disponibiliters;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Equipement", mappedBy="bien")
+     */
+    private $equipements;
+
     public function __construct()
     {
         $this->photos = new ArrayCollection();
         $this->disponibiliters = new ArrayCollection();
+        $this->equipements = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -214,6 +220,37 @@ class Bien
             // set the owning side to null (unless already changed)
             if ($disponibiliter->getBien() === $this) {
                 $disponibiliter->setBien(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Equipement[]
+     */
+    public function getEquipements(): Collection
+    {
+        return $this->equipements;
+    }
+
+    public function addEquipement(Equipement $equipement): self
+    {
+        if (!$this->equipements->contains($equipement)) {
+            $this->equipements[] = $equipement;
+            $equipement->setBien($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEquipement(Equipement $equipement): self
+    {
+        if ($this->equipements->contains($equipement)) {
+            $this->equipements->removeElement($equipement);
+            // set the owning side to null (unless already changed)
+            if ($equipement->getBien() === $this) {
+                $equipement->setBien(null);
             }
         }
 

@@ -21,6 +21,12 @@ class Equipement
      */
     private $libelle;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Bien")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $bien;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -34,6 +40,18 @@ class Equipement
     public function setLibelle(string $libelle): self
     {
         $this->libelle = $libelle;
+
+        return $this;
+    }
+
+    public function getBien(): ?Bien
+    {
+        return $this->bien;
+    }
+
+    public function setBien(?Bien $bien): self
+    {
+        $this->bien = $bien;
 
         return $this;
     }
