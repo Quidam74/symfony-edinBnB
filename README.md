@@ -11,6 +11,11 @@ php bin/console doctrine:migrations:diff
 php bin/console doctrine:migrations:migrate
 ```
 
+Create controller
+``` bash
+php bin/console make:controller
+```
+
 Doctrine
 ``` bash
 # Drop database
