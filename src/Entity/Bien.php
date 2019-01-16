@@ -58,9 +58,15 @@ class Bien
      */
     private $adresse;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Disponibiliter", mappedBy="bien")
+     */
+    private $disponibiliters;
+
     public function __construct()
     {
         $this->photos = new ArrayCollection();
+        $this->disponibiliters = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -179,6 +185,37 @@ class Bien
     public function setAdresse(?Adresse $adresse): self
     {
         $this->adresse = $adresse;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Disponibiliter[]
+     */
+    public function getDisponibiliters(): Collection
+    {
+        return $this->disponibiliters;
+    }
+
+    public function addDisponibiliter(Disponibiliter $disponibiliter): self
+    {
+        if (!$this->disponibiliters->contains($disponibiliter)) {
+            $this->disponibiliters[] = $disponibiliter;
+            $disponibiliter->setBien($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDisponibiliter(Disponibiliter $disponibiliter): self
+    {
+        if ($this->disponibiliters->contains($disponibiliter)) {
+            $this->disponibiliters->removeElement($disponibiliter);
+            // set the owning side to null (unless already changed)
+            if ($disponibiliter->getBien() === $this) {
+                $disponibiliter->setBien(null);
+            }
+        }
 
         return $this;
     }
