@@ -15,7 +15,8 @@ class AddressController extends AbstractController
     /**
      * @Route("/api/addresses", methods={ "GET" })
      */
-    public function listAddress() {
+    public function listAddress()
+    {
         $repository = $this->getDoctrine()->getRepository(Address::class);
 
         $addresses = $repository->findAll();
@@ -29,15 +30,16 @@ class AddressController extends AbstractController
     /**
      * @Route("/api/addresses", methods={ "POST" })
      */
-    public function createAddress(Request $request) {
+    public function createAddress(Request $request)
+    {
         $address = new Address();
 
         $manager = $this->getDoctrine()->getManager();
         $data = json_decode($request->getContent(), true);
 
-        $form = $this->createForm(AddressType::class, $address);
+        $form = $this->createForm(AddressType::class, $address, array("csrf_protection" => false));
         $form->handleRequest($request)
-             ->submit($data);
+            ->submit($data);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $manager->persist($address);
@@ -57,21 +59,24 @@ class AddressController extends AbstractController
     /**
      * @Route("/api/address/{addressId}", methods={ "GET" }, requirements={"addressId"="\d+"})
      */
-    public function readAddress($addressId) {
+    public function readAddress($addressId)
+    {
         return "Not implemented yet.";
     }
 
     /**
      * @Route("/api/address/{addressId}", methods={ "PUT" }, requirements={"addressId"="\d+"})
      */
-    public function updateAddress($addressId) {
+    public function updateAddress($addressId)
+    {
         return "Not implemented yet.";
     }
 
     /**
      * @Route("/api/address/{addressId}", methods={ "DELETE" }, requirements={"addressId"="\d+"})
      */
-    public function deleteAddress($addressId) {
+    public function deleteAddress($addressId)
+    {
         return "Not implemented yet.";
     }
 }
