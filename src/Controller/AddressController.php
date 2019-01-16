@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Address;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -30,16 +29,23 @@ class AddressController extends AbstractController
      * @Route("/api/addresses", methods={ "POST" })
      */
     public function createAddress(Request $request) {
-        $body = $request->request;
+        $body = json_decode($request->getContent(), true);
         $manager = $this->getDoctrine()->getManager();
+
+        // If no body is null, return error.
+        if (!$body) {
+            $response = new JsonResponse(array("message" => "Attribute(s) missing !"));
+            $response->setStatusCode(400);
+            return $response;
+        }
 
         try {
             // Create the new Address.
             $address = new Address();
-            $address->setCity($body->get("city", null));
-            $address->setComplement($body->get("complement", null));
-            $address->setCountry($body->get("country", null));
-            $address->setPostCode($body->get("postCode", null));
+            $address->setCity($body["city"]);
+            $address->setComplement($body["complement"]);
+            $address->setCountry($body["country"]);
+            $address->setPostCode($body["postCode"]);
 
             $manager->persist($address);
             $manager->flush();
@@ -49,9 +55,11 @@ class AddressController extends AbstractController
             $reports = $serializer->serialize($address, 'json');
 
             return new Response($reports);
-        } catch (\TypeError $ex) {
-            // Catch TypeError for avoid request with messing attribute(s).
-            return new JsonResponse(array("status" => 400, "message" => "Attribute(s) missing !"));
+        } catch (\Exception $ex) {
+            // Catch Exception for avoid request with messing attribute(s).
+            $response = new JsonResponse(array("message" => "Attribute(s) missing !", "error" => $ex->getMessage()));
+            $response->setStatusCode(400);
+            return $response;
         }
     }
 
