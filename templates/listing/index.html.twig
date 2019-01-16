@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réserver{% endblock %}
+
+{% block body %}
+    <section>
+
+        {% for Propertie in Properties %}
+            <article>
+                <h1>{{ Propertie.address.city~" :  "~ Propertie.address.complement}}</h1>
+                <p>{{ Propertie.description }}</p>
+                <ul>
+                    <li> nombre de personne : <span>{{ Propertie.personCount }}</span></li>
+                    <li> nombre de chambre : <span>{{ Propertie.bedRoomCount }}</span></li>
+                    <li> nombre de lit : <span>{{ Propertie.bedCount }}</span></li>
+                    <li> nombre de salle de bain : <span>{{ Propertie.bathRoomCount }}</span></li>
+                </ul>
+                <img src="">
+
+                <div>Reserver</div>
+            </article>
+        {% endfor %}
+    </section>
+{% endblock %}
