@@ -1,0 +1,38 @@
+.body {
+  display: flex;
+  width: 400vw;
+  height: 400vw;
+  overflow-x: scroll !important;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.page {
+  padding: 20px;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  .page-next {
+    display: flex;
+    background-color: red;
+    width: 100%;
+    height: 50px;
+    margin: auto;
+    margin-bottom: 0;
+    .page-nextButton{
+      margin: auto;
+      margin-right: 20px;
+      color: white;
+      line-height: 0;
+
+    }
+  }
+}
+
+.page:nth-child(even) {
+  .page-next {
+    margin: 0;
+  }
+}

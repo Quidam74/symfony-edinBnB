@@ -31,4 +31,5 @@ php bin/console doctrine:fixtures:load
 For generate/re-generate entity's accessors
 ``` bash
 php bin/console  make:entity --regenerate
+php bin/console cache:clear
 ```

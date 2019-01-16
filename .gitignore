@@ -19,3 +19,8 @@
 
 .idea
 .env
+
+**/node_modules
+
+src/web
+src/.DS_Store
