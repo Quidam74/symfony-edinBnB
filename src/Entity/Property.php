@@ -49,7 +49,7 @@ class Property
     private $bathRoomCount;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Picture", mappedBy="property")
+     * @ORM\OneToMany(targetEntity="App\Entity\Picture", mappedBy="property", fetch="EAGER")
      */
     private $pictures;
 

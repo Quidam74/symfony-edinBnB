@@ -28,7 +28,7 @@ class Picture
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Property")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(nullable=false)
      */
     private $property;
 

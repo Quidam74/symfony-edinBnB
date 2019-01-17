@@ -5,23 +5,31 @@
 {% block body %}
     <section class="listing">
 
-        {% for Propertie in Properties %}
+        {% for propertie in properties %}
+
+
             <article class="propertie">
-                <h1 class="propertie-title">{{ Propertie.address.city~" :  "~ Propertie.address.complement }}</h1>
-                <img class="propertie-img"
-                     src="web/static/img/img1.jpg">
+                <h1 class="propertie-title">{{ propertie.address.city~" :  "~ propertie.address.complement }}</h1>
+                <div class="propertie-imgList">
+                    {% for img in propertie.pictures %}
 
-                <p class="propertie-description">{{ Propertie.description }}</p>
+                        <img class="propertie-img" src="{{ img.url }}">
 
-                <p class="propertie-introduceEquipement">les différents équipements :</pclas>
+                    {% endfor %}
+                </div>
+
+
+                <p class="propertie-description">{{ propertie.description }}</p>
+
+                <p class="propertie-introduceEquipement">les différentes caractéristiques :</pclas>
                 <ul class="carac">
-                    <li class="carac-elem carac-personne"> nombre de personne : <span>{{ Propertie.personCount }}</span>
+                    <li class="carac-elem carac-personne"> nombre de personne : <span>{{ propertie.personCount }}</span>
                     </li>
-                    <li class="carac-elem carac-bedRoom"> nombre de chambre : <span>{{ Propertie.bedRoomCount }}</span>
+                    <li class="carac-elem carac-bedRoom"> nombre de chambre : <span>{{ propertie.bedRoomCount }}</span>
                     </li>
-                    <li class="carac-elem carac-bed"> nombre de lit : <span>{{ Propertie.bedCount }}</span></li>
+                    <li class="carac-elem carac-bed"> nombre de lit : <span>{{ propertie.bedCount }}</span></li>
                     <li class="carac-elem carac-bathRoom"> nombre de salle de bain :
-                        <span>{{ Propertie.bathRoomCount }}</span></li>
+                        <span>{{ propertie.bathRoomCount }}</span></li>
                 </ul>
 
                 <div class="propertie-button">Reserver</div>
