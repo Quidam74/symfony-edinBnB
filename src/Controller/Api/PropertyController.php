@@ -22,7 +22,7 @@ class PropertyController extends AbstractController
         $properties = $repository->findAll();
 
         $serializer = $this->container->get('serializer');
-        $reports = $serializer->serialize($properties, 'json');
+        $reports = $serializer->serialize($properties, 'json', ['groups' => 'property']);
 
         $response = new Response($reports);
         $response->headers->set("Content-Type", "application/json");
@@ -51,7 +51,7 @@ class PropertyController extends AbstractController
             $manager->flush();
 
             $serializer = $this->container->get('serializer');
-            $reports = $serializer->serialize($property, 'json');
+            $reports = $serializer->serialize($property, 'json', ['groups' => 'property']);
 
             // Return the created Property.
             $response = new Response($reports);
@@ -77,7 +77,7 @@ class PropertyController extends AbstractController
 
         // Parse Object to jsonString.
         $serializer = $this->container->get('serializer');
-        $reports = $serializer->serialize($property, 'json');
+        $reports = $serializer->serialize($property, 'json', ['groups' => 'property']);
 
         $response = new Response($reports);
         $response->headers->set("Content-Type", "application/json");
@@ -109,7 +109,7 @@ class PropertyController extends AbstractController
 
             // Parse Object to jsonString.
             $serializer = $this->container->get('serializer');
-            $reports = $serializer->serialize($property, 'json');
+            $reports = $serializer->serialize($property, 'json', ['groups' => 'property']);
 
             // Return the created Property.
             $response = new Response($reports);

@@ -17,77 +17,77 @@ class Property
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"user", "availability"})
+     * @Groups({"user", "availability", "property"})
      * @MaxDepth(1)
      */
     private $id;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"out"})
+     * @Groups({"property"})
      * @MaxDepth(1)
      */
     private $description;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"out"})
+     * @Groups({"property"})
      * @MaxDepth(1)
      */
     private $price;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"out"})
+     * @Groups({"property"})
      * @MaxDepth(1)
      */
     private $bedRoomCount;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"out"})
+     * @Groups({"property"})
      * @MaxDepth(1)
      */
     private $bedCount;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"out"})
+     * @Groups({"property"})
      * @MaxDepth(1)
      */
     private $personCount;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"out"})
+     * @Groups({"property"})
      * @MaxDepth(1)
      */
     private $bathRoomCount;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Picture", mappedBy="property")
-     * @Groups({"out"})
+     * @Groups({"property"})
      * @MaxDepth(1)
      */
     private $pictures;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Address", cascade={"persist"}, fetch="EAGER")
-     * @Groups({"out"})
+     * @Groups({"property"})
      * @MaxDepth(1)
      */
     private $address;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Availability", mappedBy="property")
-     * @Groups({"out"})
+     * @Groups({"property"})
      * @MaxDepth(1)
      */
     private $availabilities;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Equipment")
-     * @Groups({"out"})
+     * @Groups({"property"})
      * @MaxDepth(1)
      */
     private $equipments;
@@ -95,14 +95,14 @@ class Property
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(nullable=true)
-     * @Groups({"out"})
+     * @Groups({"property"})
      * @MaxDepth(1)
      */
     private $user;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Travel", mappedBy="property")
-     * @Groups({"out"})
+     * @Groups({"property"})
      * @MaxDepth(1)
      */
     private $travels;

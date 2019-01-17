@@ -15,7 +15,7 @@ class Equipment
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"out"})
+     * @Groups({"property"})
      * @MaxDepth(1)
      */
     private $id;

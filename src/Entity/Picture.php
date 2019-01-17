@@ -15,21 +15,21 @@ class Picture
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"out"})
+     * @Groups({"property"})
      * @MaxDepth(1)
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=80)
-     * @Groups({"out"})
+     * @Groups({"property"})
      * @MaxDepth(1)
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=40)
-     * @Groups({"out"})
+     * @Groups({"property"})
      * @MaxDepth(1)
      */
     private $url;
@@ -37,7 +37,7 @@ class Picture
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Property")
      * @ORM\JoinColumn(nullable=true)
-     * @Groups({"out"})
+     * @Groups({"property"})
      * @MaxDepth(1)
      */
     private $property;

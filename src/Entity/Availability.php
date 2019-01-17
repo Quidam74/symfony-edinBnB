@@ -15,7 +15,7 @@ class Availability
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"availability"})
+     * @Groups({"availability", "property"})
      * @MaxDepth(1)
      */
     private $id;

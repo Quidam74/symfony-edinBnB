@@ -15,35 +15,35 @@ class Address
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"user"})
+     * @Groups({"user", "property"})
      * @MaxDepth(1)
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=60)
-     * @Groups({"user"})
+     * @Groups({"user", "property"})
      * @MaxDepth(1)
      */
     private $country;
 
     /**
      * @ORM\Column(type="string", length=60)
-     * @Groups({"user"})
+     * @Groups({"user", "property"})
      * @MaxDepth(1)
      */
     private $city;
 
     /**
      * @ORM\Column(type="string", length=60)
-     * @Groups({"user"})
+     * @Groups({"user", "property"})
      * @MaxDepth(1)
      */
     private $postCode;
 
     /**
      * @ORM\Column(type="string", length=150)
-     * @Groups({"user"})
+     * @Groups({"user", "property"})
      * @MaxDepth(1)
      */
     private $complement;
