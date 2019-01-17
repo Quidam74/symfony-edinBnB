@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réserver{% endblock %}
+
+{% block body %}
+    <section class="listing">
+
+        {% for property in properties %}
+
+            <article class="listing-oneProperty">
+                <h1 class="listing-title">{{ property.address.city~" :  "~ property.address.complement }}</h1>
+                {% set image = property.pictures.first() %}
+                <img class="listing-img" src="{{ image ? image.url }}">
+
+            </article>
+
+
+        {% endfor %}
+    </section>
+{% endblock %}

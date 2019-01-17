@@ -1,0 +1,16 @@
+.listing {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  &-oneProperty {
+    margin: auto;
+
+
+  }
+  &-title {
+
+  }
+  &-img {
+    width: 50%;
+  }
+}
