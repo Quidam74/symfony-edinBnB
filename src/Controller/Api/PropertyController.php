@@ -29,8 +29,34 @@ class PropertyController extends AbstractController
     /**
      * @Route("/api/properties", methods={ "POST" })
      */
-    public function createProperty() {
-        return "Not implemented yet.";
+    public function createProperty(Request $request) {
+        $property = new Property();
+
+        $manager = $this->getDoctrine()->getManager();
+        // Get the data of request.
+        $data = json_decode($request->getContent(), true);
+
+        // Create form without csrf protection.
+        $form = $this->createForm(PropertyType::class, $property, array("csrf_protection" => false));
+        $form->handleRequest($request)
+            ->submit($data);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // If the request is valide, save the new Property.
+            $manager->persist($property);
+            $manager->flush();
+
+            $serializer = $this->container->get('serializer');
+            $reports = $serializer->serialize($property, 'json');
+
+            // Return the created Property.
+            return new Response($reports);
+        }
+
+        // Else return an error.
+        $response = new JsonResponse(array("message" => "Attribute(s) missing !"));
+        $response->setStatusCode(400);
+        return $response;
     }
 
     /**
