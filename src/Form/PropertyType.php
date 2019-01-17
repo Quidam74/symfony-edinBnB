@@ -24,7 +24,7 @@ class PropertyType extends AbstractType
             ->add('bathRoomCount', NumberType::class, ['required' => true, 'constraints' => [new NotNull()]])
             ->add('address', AddressType::class)
             ->add('equipments', EquipmentType::class)
-            ->add('user')
+            ->add('user', UserType::class)
         ;
     }
 

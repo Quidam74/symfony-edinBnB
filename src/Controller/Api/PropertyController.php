@@ -4,6 +4,7 @@ namespace App\Controller\Api;
 
 use App\Entity\Property;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -31,23 +32,32 @@ class PropertyController extends AbstractController
     }
 
     /**
-     * @Route("/api/properties/{propertiesId}", methods={ "GET" }, requirements={"propertiesId"="\d+"})
+     * @Route("/api/properties/{propertyId}", methods={ "GET" }, requirements={"propertyId"="\d+"})
      */
-    public function readProperty($propertiesId) {
+    public function readProperty($propertyId) {
         return "Not implemented yet.";
     }
 
     /**
-     * @Route("/api/properties/{propertiesId}", methods={ "PUT" }, requirements={"propertiesId"="\d+"})
+     * @Route("/api/properties/{propertyId}", methods={ "PUT" }, requirements={"propertyId"="\d+"})
      */
-    public function updateProperty($propertiesId) {
+    public function updateProperty($propertyId) {
         return "Not implemented yet.";
     }
 
     /**
-     * @Route("/api/properties/{propertiesId}", methods={ "DELETE" }, requirements={"propertiesId"="\d+"})
+     * @Route("/api/properties/{propertyId}", methods={ "DELETE" }, requirements={"propertyId"="\d+"})
      */
-    public function deleteProperty($propertiesId) {
-        return "Not implemented yet.";
+    public function deleteProperty($propertyId) {
+        $manager = $this->getDoctrine()->getManager();
+        $repository = $this->getDoctrine()->getRepository(Property::class);
+        // Find the Property with id $propertyId.
+        $property = $repository->find($propertyId);
+
+        // Remove the Property.
+        $manager->remove($property);
+        $manager->flush();
+
+        return new JsonResponse(array("message" => "Successfully deleted."));
     }
 }
