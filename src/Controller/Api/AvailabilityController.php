@@ -116,6 +116,15 @@ class AvailabilityController extends AbstractController
      * @Route("/api/availability/{availabilityId}", methods={ "DELETE" }, requirements={"availabilityId"="\d+"})
      */
     public function deleteAvailability($availabilityId) {
-        return "Not implemented yet.";
+        $manager = $this->getDoctrine()->getManager();
+        $repository = $this->getDoctrine()->getRepository(Availability::class);
+        // Find the Availability with id $availabilityId.
+        $availability = $repository->find($availabilityId);
+
+        // Remove the Availability.
+        $manager->remove($availability);
+        $manager->flush();
+
+        return new JsonResponse(array("message" => "Successfully deleted."));
     }
 }
