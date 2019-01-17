@@ -24,8 +24,7 @@ class PropertyType extends AbstractType
             ->add('bathRoomCount', NumberType::class, ['required' => true, 'constraints' => [new NotNull()]])
             ->add('address', AddressType::class)
             ->add('equipments', EquipmentType::class)
-            ->add('user', UserType::class)
-        ;
+            ->add('user', UserType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

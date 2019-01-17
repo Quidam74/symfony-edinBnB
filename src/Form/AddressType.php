@@ -19,8 +19,7 @@ class AddressType extends AbstractType
             ->add('country', TextType::class, ['required' => true, 'constraints' => [new NotBlank(), new NotNull()]])
             ->add('city', TextType::class, ['required' => true, 'constraints' => [new NotBlank(), new NotNull()]])
             ->add('postCode', TextType::class, ['required' => true, 'constraints' => [new NotBlank(), new NotNull()]])
-            ->add('complement', TextareaType::class, ['required' => true, 'constraints' => [new NotBlank(), new NotNull()]])
-        ;
+            ->add('complement', TextareaType::class, ['required' => true, 'constraints' => [new NotBlank(), new NotNull()]]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

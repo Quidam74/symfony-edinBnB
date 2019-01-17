@@ -19,8 +19,7 @@ class AvailabilityType extends AbstractType
         $builder
             ->add('isAvailable', CheckboxType::class, ['required' => true, 'constraints' => [new NotNull()]])
             ->add('day', DateType::class, ['required' => true, 'constraints' => [new NotBlank(), new NotNull()]])
-            ->add('property', TextType::class, ['required' => true, 'constraints' => [new NotBlank(), new NotNull()]])
-        ;
+            ->add('property', TextType::class, ['required' => true, 'constraints' => [new NotBlank(), new NotNull()]]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

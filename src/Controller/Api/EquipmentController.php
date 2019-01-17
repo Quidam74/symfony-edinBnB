@@ -15,7 +15,8 @@ class EquipmentController extends AbstractController
     /**
      * @Route("/api/equipments", methods={ "GET" })
      */
-    public function listEquipment() {
+    public function listEquipment()
+    {
         $repository = $this->getDoctrine()->getRepository(Equipment::class);
 
         $equipments = $repository->findAll();
@@ -29,7 +30,8 @@ class EquipmentController extends AbstractController
     /**
      * @Route("/api/equipments", methods={ "POST" })
      */
-    public function createEquipment(Request $request) {
+    public function createEquipment(Request $request)
+    {
         $equipment = new Equipment();
 
         $manager = $this->getDoctrine()->getManager();
@@ -62,23 +64,25 @@ class EquipmentController extends AbstractController
     /**
      * @Route("/api/equipment/{equipmentId}", methods={ "GET" }, requirements={"equipmentId"="\d+"})
      */
-    public function readEquipment($equipmentId) {
-            $repository = $this->getDoctrine()->getRepository(Equipment::class);
+    public function readEquipment($equipmentId)
+    {
+        $repository = $this->getDoctrine()->getRepository(Equipment::class);
 
-            // Find the Equipment with id $equipmentId.
-            $equipment = $repository->find($equipmentId);
+        // Find the Equipment with id $equipmentId.
+        $equipment = $repository->find($equipmentId);
 
-            // Parse Object to jsonString.
-            $serializer = $this->container->get('serializer');
-            $reports = $serializer->serialize($equipment, 'json');
+        // Parse Object to jsonString.
+        $serializer = $this->container->get('serializer');
+        $reports = $serializer->serialize($equipment, 'json');
 
-            return new Response($reports);
+        return new Response($reports);
     }
 
     /**
      * @Route("/api/equipment/{equipmentId}", methods={ "PUT" }, requirements={"equipmentId"="\d+"})
      */
-    public function updateEquipment(Request $request , $equipmentId) {
+    public function updateEquipment(Request $request, $equipmentId)
+    {
         $repository = $this->getDoctrine()->getRepository(Equipment::class);
         // Find the Equipment with id $equipmentId.
         $equipment = $repository->find($equipmentId);
@@ -114,7 +118,8 @@ class EquipmentController extends AbstractController
     /**
      * @Route("/api/equipment/{equipmentId}", methods={ "DELETE" }, requirements={"equipmentId"="\d+"})
      */
-    public function deleteEquipment($equipmentId) {
+    public function deleteEquipment($equipmentId)
+    {
         $manager = $this->getDoctrine()->getManager();
         $repository = $this->getDoctrine()->getRepository(Equipment::class);
         // Find the Equipment with id $equipmentId.

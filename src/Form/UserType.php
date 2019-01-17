@@ -26,8 +26,7 @@ class UserType extends AbstractType
             ->add('hashPassword', PasswordType::class, ['required' => true, 'constraints' => [new NotBlank(), new NotNull()]])
             ->add('bankingReference', TextType::class, ['required' => true, 'constraints' => [new NotBlank(), new NotNull()]])
             ->add('isTraveler', CheckboxType::class, ['required' => true, 'constraints' => [new NotNull()]])
-            ->add('address',AddressType::class, ['required' => true, 'constraints' => [new NotNull()]])
-        ;
+            ->add('address', AddressType::class, ['required' => true, 'constraints' => [new NotNull()]]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

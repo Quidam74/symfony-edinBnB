@@ -14,8 +14,7 @@ class TravelType extends AbstractType
         $builder
             ->add('days')
             ->add('user', UserType::class)
-            ->add('property', PropertyType::class)
-        ;
+            ->add('property', PropertyType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

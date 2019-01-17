@@ -15,7 +15,8 @@ class AvailabilityController extends AbstractController
     /**
      * @Route("/api/availabilities", methods={ "GET" })
      */
-    public function listAvailability() {
+    public function listAvailability()
+    {
         $repository = $this->getDoctrine()->getRepository(Availability::class);
 
         $availabilities = $repository->findAll();
@@ -30,7 +31,8 @@ class AvailabilityController extends AbstractController
     /**
      * @Route("/api/availabilities", methods={ "POST" })
      */
-    public function createAvailability(Request $request) {
+    public function createAvailability(Request $request)
+    {
         $availability = new Availability();
 
         $manager = $this->getDoctrine()->getManager();
@@ -63,7 +65,8 @@ class AvailabilityController extends AbstractController
     /**
      * @Route("/api/availability/{availabilityId}", methods={ "GET" }, requirements={"availabilityId"="\d+"})
      */
-    public function readAvailability($availabilityId) {
+    public function readAvailability($availabilityId)
+    {
         $repository = $this->getDoctrine()->getRepository(Availability::class);
 
         // Find the Availability with id $availabilityId.
@@ -79,7 +82,8 @@ class AvailabilityController extends AbstractController
     /**
      * @Route("/api/availability/{availabilityId}", methods={ "PUT" }, requirements={"availabilityId"="\d+"})
      */
-    public function updateAvailability(Request $request, $availabilityId) {
+    public function updateAvailability(Request $request, $availabilityId)
+    {
         $repository = $this->getDoctrine()->getRepository(Availability::class);
         // Find the Availability with id $availabilityId.
         $availability = $repository->find($availabilityId);
@@ -115,7 +119,8 @@ class AvailabilityController extends AbstractController
     /**
      * @Route("/api/availability/{availabilityId}", methods={ "DELETE" }, requirements={"availabilityId"="\d+"})
      */
-    public function deleteAvailability($availabilityId) {
+    public function deleteAvailability($availabilityId)
+    {
         $manager = $this->getDoctrine()->getManager();
         $repository = $this->getDoctrine()->getRepository(Availability::class);
         // Find the Availability with id $availabilityId.

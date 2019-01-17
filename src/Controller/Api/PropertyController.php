@@ -15,7 +15,8 @@ class PropertyController extends AbstractController
     /**
      * @Route("/api/properties", methods={ "GET" })
      */
-    public function listProperty() {
+    public function listProperty()
+    {
         $repository = $this->getDoctrine()->getRepository(Property::class);
 
         $properties = $repository->findAll();
@@ -29,7 +30,8 @@ class PropertyController extends AbstractController
     /**
      * @Route("/api/properties", methods={ "POST" })
      */
-    public function createProperty(Request $request) {
+    public function createProperty(Request $request)
+    {
         $property = new Property();
 
         $manager = $this->getDoctrine()->getManager();
@@ -62,7 +64,8 @@ class PropertyController extends AbstractController
     /**
      * @Route("/api/properties/{propertyId}", methods={ "GET" }, requirements={"propertyId"="\d+"})
      */
-    public function readProperty($propertyId) {
+    public function readProperty($propertyId)
+    {
         $repository = $this->getDoctrine()->getRepository(Property::class);
 
         // Find the Property with id $propertyId.
@@ -78,7 +81,8 @@ class PropertyController extends AbstractController
     /**
      * @Route("/api/properties/{propertyId}", methods={ "PUT" }, requirements={"propertyId"="\d+"})
      */
-    public function updateProperty(Request $request, $propertyId) {
+    public function updateProperty(Request $request, $propertyId)
+    {
         $repository = $this->getDoctrine()->getRepository(Property::class);
         // Find the Property with id $propertyId.
         $property = $repository->find($propertyId);
@@ -114,7 +118,8 @@ class PropertyController extends AbstractController
     /**
      * @Route("/api/properties/{propertyId}", methods={ "DELETE" }, requirements={"propertyId"="\d+"})
      */
-    public function deleteProperty($propertyId) {
+    public function deleteProperty($propertyId)
+    {
         $manager = $this->getDoctrine()->getManager();
         $repository = $this->getDoctrine()->getRepository(Property::class);
         // Find the Property with id $propertyId.

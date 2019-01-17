@@ -15,7 +15,8 @@ class TravelController extends AbstractController
     /**
      * @Route("/api/travels", methods={ "GET" })
      */
-    public function listTravel() {
+    public function listTravel()
+    {
         $repository = $this->getDoctrine()->getRepository(Travel::class);
 
         $travel = $repository->findAll();
@@ -29,7 +30,8 @@ class TravelController extends AbstractController
     /**
      * @Route("/api/travels", methods={ "POST" })
      */
-    public function createTravel(Request $request) {
+    public function createTravel(Request $request)
+    {
         $travel = new Travel();
 
         $manager = $this->getDoctrine()->getManager();
@@ -62,7 +64,8 @@ class TravelController extends AbstractController
     /**
      * @Route("/api/travel/{travelId}", methods={ "GET" }, requirements={"travelId"="\d+"})
      */
-    public function readTravel($travelId) {
+    public function readTravel($travelId)
+    {
         $repository = $this->getDoctrine()->getRepository(Travel::class);
 
         // Find the Travel with id $travelId.
@@ -78,7 +81,8 @@ class TravelController extends AbstractController
     /**
      * @Route("/api/travel/{travelId}", methods={ "PUT" }, requirements={"travelId"="\d+"})
      */
-    public function updateTravel(request $request, $travelId) {
+    public function updateTravel(request $request, $travelId)
+    {
         $repository = $this->getDoctrine()->getRepository(Travel::class);
         // Find the Travel with id $travelId.
         $travel = $repository->find($travelId);
@@ -114,7 +118,8 @@ class TravelController extends AbstractController
     /**
      * @Route("/api/travel/{travelId}", methods={ "DELETE" }, requirements={"travelId"="\d+"})
      */
-    public function deleteTravel($travelId) {
+    public function deleteTravel($travelId)
+    {
         $manager = $this->getDoctrine()->getManager();
         $repository = $this->getDoctrine()->getRepository(Travel::class);
         // Find the Travel with id $travelId.

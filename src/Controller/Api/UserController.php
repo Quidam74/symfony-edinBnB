@@ -15,7 +15,8 @@ class UserController extends AbstractController
     /**
      * @Route("/api/users", methods={ "GET" })
      */
-    public function listUsers() {
+    public function listUsers()
+    {
         $repository = $this->getDoctrine()->getRepository(User::class);
 
         $users = $repository->findAll();
@@ -29,7 +30,8 @@ class UserController extends AbstractController
     /**
      * @Route("/api/users", methods={ "POST" })
      */
-    public function createUser(Request $request) {
+    public function createUser(Request $request)
+    {
         $user = new User();
 
         $manager = $this->getDoctrine()->getManager();
@@ -62,7 +64,8 @@ class UserController extends AbstractController
     /**
      * @Route("/api/user/{userId}", methods={ "GET" }, requirements={"userId"="\d+"})
      */
-    public function readUser($userId) {
+    public function readUser($userId)
+    {
         $repository = $this->getDoctrine()->getRepository(User::class);
 
         // Find the User with id $userId.
@@ -78,7 +81,8 @@ class UserController extends AbstractController
     /**
      * @Route("/api/user/{userId}", methods={ "PUT" }, requirements={"userId"="\d+"})
      */
-    public function updateUser(Request $request, $userId) {
+    public function updateUser(Request $request, $userId)
+    {
         $repository = $this->getDoctrine()->getRepository(User::class);
         // Find the User with id $userId.
         $user = $repository->find($userId);
@@ -114,7 +118,8 @@ class UserController extends AbstractController
     /**
      * @Route("/api/user/{userId}", methods={ "DELETE" }, requirements={"userId"="\d+"})
      */
-    public function deleteUser($userId) {
+    public function deleteUser($userId)
+    {
         $manager = $this->getDoctrine()->getManager();
         $repository = $this->getDoctrine()->getRepository(User::class);
         // Find the User with id $userId.

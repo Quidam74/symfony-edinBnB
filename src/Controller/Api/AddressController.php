@@ -94,7 +94,7 @@ class AddressController extends AbstractController
 
         $form = $this->createForm(AddressType::class, $address, array("csrf_protection" => false));
         $form->handleRequest($request)
-             ->submit($data);
+            ->submit($data);
 
         // Create form without csrf protection.
         if ($form->isSubmitted() && $form->isValid()) {
