@@ -144,12 +144,12 @@ class AllFixtures extends Fixture
 
         $availability->setDay($jour);
         $availability->setIsAvailable(true);
-        $availability->setProperty($bien);
+        $availability->setProperty($property);
 
         $manager->persist($availability);
 
         $travel = new Travel();
-        $travel->setProperty($bien);
+        $travel->setProperty($property);
         $travel->setUser($traveler);
         $travel->addDay($jour);
 
