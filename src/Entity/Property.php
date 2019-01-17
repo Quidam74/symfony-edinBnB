@@ -61,10 +61,10 @@ class Property
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Availability", mappedBy="property")
      */
-    private $Availabilities;
+    private $availabilities;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Equipment", mappedBy="property")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Equipment")
      */
     private $equipments;
 
@@ -74,11 +74,17 @@ class Property
      */
     private $user;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Travel", mappedBy="property")
+     */
+    private $travels;
+
     public function __construct()
     {
         $this->pictures = new ArrayCollection();
-        $this->Availabilities = new ArrayCollection();
+        $this->availabilities = new ArrayCollection();
         $this->equipments = new ArrayCollection();
+        $this->travels = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -206,13 +212,13 @@ class Property
      */
     public function getAvailabilities(): Collection
     {
-        return $this->Availabilities;
+        return $this->availabilities;
     }
 
     public function addAvailability(Availability $availability): self
     {
-        if (!$this->Availabilities->contains($availability)) {
-            $this->Availabilities[] = $availability;
+        if (!$this->availabilities->contains($availability)) {
+            $this->availabilities[] = $availability;
             $availability->setProperty($this);
         }
 
@@ -221,8 +227,8 @@ class Property
 
     public function removeAvailability(Availability $availability): self
     {
-        if ($this->Availabilities->contains($availability)) {
-            $this->Availabilities->removeElement($availability);
+        if ($this->availabilities->contains($availability)) {
+            $this->availabilities->removeElement($availability);
             // set the owning side to null (unless already changed)
             if ($availability->getProperty() === $this) {
                 $availability->setProperty(null);
@@ -244,7 +250,6 @@ class Property
     {
         if (!$this->equipments->contains($equipment)) {
             $this->equipments[] = $equipment;
-            $equipment->setProperty($this);
         }
 
         return $this;
@@ -254,10 +259,6 @@ class Property
     {
         if ($this->equipments->contains($equipment)) {
             $this->equipments->removeElement($equipment);
-            // set the owning side to null (unless already changed)
-            if ($equipment->getProperty() === $this) {
-                $equipment->setProperty(null);
-            }
         }
 
         return $this;
@@ -275,4 +276,34 @@ class Property
         return $this;
     }
 
+    /**
+     * @return Collection|Travel[]
+     */
+    public function getTravels(): Collection
+    {
+        return $this->travels;
+    }
+
+    public function addTravel(Travel $travel): self
+    {
+        if (!$this->travels->contains($travel)) {
+            $this->travels[] = $travel;
+            $travel->setProperty($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTravel(Travel $travel): self
+    {
+        if ($this->travels->contains($travel)) {
+            $this->travels->removeElement($travel);
+            // set the owning side to null (unless already changed)
+            if ($travel->getProperty() === $this) {
+                $travel->setProperty(null);
+            }
+        }
+
+        return $this;
+    }
 }
