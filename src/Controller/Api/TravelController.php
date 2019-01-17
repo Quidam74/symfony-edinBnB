@@ -78,8 +78,37 @@ class TravelController extends AbstractController
     /**
      * @Route("/api/travel/{travelId}", methods={ "PUT" }, requirements={"travelId"="\d+"})
      */
-    public function updateTravel($travelId) {
-        return "Not implemented yet.";
+    public function updateTravel(request $request, $travelId) {
+        $repository = $this->getDoctrine()->getRepository(Travel::class);
+        // Find the Travel with id $travelId.
+        $travel = $repository->find($travelId);
+
+        $manager = $this->getDoctrine()->getManager();
+        // Get the data of request.
+        $data = json_decode($request->getContent(), true);
+
+        $form = $this->createForm(TravelType::class, $travel, array("csrf_protection" => false));
+        $form->handleRequest($request)
+            ->submit($data);
+
+        // Create form without csrf protection.
+        if ($form->isSubmitted() && $form->isValid()) {
+            // If the request is valide, save the new Travel.
+            $manager->persist($travel);
+            $manager->flush();
+
+            // Parse Object to jsonString.
+            $serializer = $this->container->get('serializer');
+            $reports = $serializer->serialize($travel, 'json');
+
+            // Return the created Travel.
+            return new Response($reports);
+        }
+
+        // Else return an error.
+        $response = new JsonResponse(array("message" => "Attribute(s) missing !"));
+        $response->setStatusCode(400);
+        return $response;
     }
 
     /**
