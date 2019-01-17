@@ -78,8 +78,37 @@ class UserController extends AbstractController
     /**
      * @Route("/api/user/{userId}", methods={ "PUT" }, requirements={"userId"="\d+"})
      */
-    public function updateUser($userId) {
-        return "Not implemented yet.";
+    public function updateUser(Request $request, $userId) {
+        $repository = $this->getDoctrine()->getRepository(User::class);
+        // Find the User with id $userId.
+        $user = $repository->find($userId);
+
+        $manager = $this->getDoctrine()->getManager();
+        // Get the data of request.
+        $data = json_decode($request->getContent(), true);
+
+        $form = $this->createForm(UserType::class, $user, array("csrf_protection" => false));
+        $form->handleRequest($request)
+            ->submit($data);
+
+        // Create form without csrf protection.
+        if ($form->isSubmitted() && $form->isValid()) {
+            // If the request is valide, save the new User.
+            $manager->persist($user);
+            $manager->flush();
+
+            // Parse Object to jsonString.
+            $serializer = $this->container->get('serializer');
+            $reports = $serializer->serialize($user, 'json');
+
+            // Return the created User.
+            return new Response($reports);
+        }
+
+        // Else return an error.
+        $response = new JsonResponse(array("message" => "Attribute(s) missing !"));
+        $response->setStatusCode(400);
+        return $response;
     }
 
     /**
