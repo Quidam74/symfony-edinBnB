@@ -25,11 +25,11 @@ class PropertyController extends AbstractController
     }
 
     /**
-     * @Route("/property", name="property")
+     * @Route("/property/{propertyId}", name="property", requirements={"propertyId"="\d+"})
      */
-    public function index(PropertyRepository $propertyRepository)
+    public function index(PropertyRepository $propertyRepository, $propertyId)
     {
-        $property = $propertyRepository->findOneBy(['id'=>'15']);
+        $property = $propertyRepository->findOneBy(['id'=> $propertyId]);
 
         return $this->render('property/property.html.twig', [
             'controller_name' => 'ListingController',
