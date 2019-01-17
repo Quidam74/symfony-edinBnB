@@ -1,6 +1,24 @@
 # EdinBnB
 
-## Tuto
+## Usage
+
+Install dependencies.
+``` bash   
+# Symfony dependencies.
+composer install
+# Npm dependencies
+npm install
+```
+
+Usage
+``` bash
+# Run symfony server
+php bin/console server:run
+# Run gulp (in other terminal)
+npm run dev
+```
+
+## Helpers
 
 Create entity
 ``` bash
