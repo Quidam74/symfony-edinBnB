@@ -22,6 +22,10 @@ security:
                 authenticators:
                     - App\Security\LoginFormAuthenticator
 
+            logout:
+                path: app_logout
+                target: properties
+
             # activate different ways to authenticate
 
             # http_basic: true
