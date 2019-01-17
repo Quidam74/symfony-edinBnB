@@ -5,13 +5,16 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -44,6 +47,13 @@ class User
     private $email;
 
     /**
+     * @ORM\Column(type="json")
+     * @Groups({"user"})
+     * @MaxDepth(1)
+     */
+    private $roles = [];
+
+    /**
      * @ORM\Column(type="date")
      * @Groups({"user"})
      * @MaxDepth(1)
@@ -51,8 +61,7 @@ class User
     private $dateOfBirth;
 
     /**
-     * @ORM\Column(type="string", length=60)
-     * @Groups({"user"})
+     * @ORM\Column(type="string", length=255)
      * @MaxDepth(1)
      */
     private $hashPassword;
@@ -96,6 +105,67 @@ class User
     {
         $this->travels = new ArrayCollection();
         $this->properties = new ArrayCollection();
+    }
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUsername(): string
+    {
+        return (string)$this->email;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getPassword(): string
+    {
+        return (string)$this->hashPassword;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->hashPassword = $password;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getSalt()
+    {
+        // not needed when using the "bcrypt" algorithm in security.yaml
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 
     public function getId(): ?int
@@ -260,5 +330,4 @@ class User
 
         return $this;
     }
-
 }
