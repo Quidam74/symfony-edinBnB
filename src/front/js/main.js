@@ -1,6 +1,6 @@
 
 import Example from './components/Example'
-import Page from './components/Page'
+import Listing from './components/Listing'
 import {getBrowser} from './utils/environment'
 
 const App = {
@@ -13,8 +13,8 @@ const App = {
         this.initComponents();
         this.bindEvent();
 
-        console.log(getBrowser());
-        new Page();
+
+        new Listing();
     },
 
     bindEvent(){
