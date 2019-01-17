@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AvailabilityRepository")
@@ -13,22 +15,30 @@ class Availability
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"out"})
+     * @MaxDepth(1)
      */
     private $id;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"out"})
+     * @MaxDepth(1)
      */
     private $isAvailable;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Day", cascade={"persist"})
+     * @Groups({"out"})
+     * @MaxDepth(1)
      */
     private $day;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Property")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"out"})
+     * @MaxDepth(1)
      */
     private $property;
 

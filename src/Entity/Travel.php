@@ -5,6 +5,8 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TravelRepository")
@@ -15,23 +17,31 @@ class Travel
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"user"})
+     * @MaxDepth(1)
      */
     private $id;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Day", cascade={"persist"})
+     * @Groups({"out"})
+     * @MaxDepth(1)
      */
     private $days;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"out"})
+     * @MaxDepth(1)
      */
     private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Property")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"out"})
+     * @MaxDepth(1)
      */
     private $property;
 

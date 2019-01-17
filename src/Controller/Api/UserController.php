@@ -22,7 +22,7 @@ class UserController extends AbstractController
         $users = $repository->findAll();
 
         $serializer = $this->container->get('serializer');
-        $reports = $serializer->serialize($users, 'json');
+        $reports = $serializer->serialize($users, 'json', ['groups' => 'user']);
 
         $response = new Response($reports);
         $response->headers->set("Content-Type", "application/json");
@@ -51,7 +51,7 @@ class UserController extends AbstractController
             $manager->flush();
 
             $serializer = $this->container->get('serializer');
-            $reports = $serializer->serialize($user, 'json');
+            $reports = $serializer->serialize($user, 'json', ['groups' => 'user']);
 
             // Return the created User.
             $response = new Response($reports);
@@ -77,7 +77,7 @@ class UserController extends AbstractController
 
         // Parse Object to jsonString.
         $serializer = $this->container->get('serializer');
-        $reports = $serializer->serialize($user, 'json');
+        $reports = $serializer->serialize($user, 'json', ['groups' => 'user']);
 
         $response = new Response($reports);
         $response->headers->set("Content-Type", "application/json");
@@ -109,7 +109,7 @@ class UserController extends AbstractController
 
             // Parse Object to jsonString.
             $serializer = $this->container->get('serializer');
-            $reports = $serializer->serialize($user, 'json');
+            $reports = $serializer->serialize($user, 'json', ['groups' => 'user']);
 
             // Return the created User.
             $response = new Response($reports);
