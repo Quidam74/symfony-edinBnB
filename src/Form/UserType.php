@@ -27,7 +27,7 @@ class UserType extends AbstractType
             ->add('bankingReference', TextType::class, ['required' => true, 'constraints' => [new NotBlank(), new NotNull()]])
             ->add('isTraveler', CheckboxType::class, ['required' => true, 'constraints' => [new NotNull()]])
             ->add('address', AddressType::class, ['required' => true, 'constraints' => [new NotNull()]])
-            ->add('hashPassword', PasswordType::class, [
+            ->add('plainPassword', PasswordType::class, [
                 'required' => true,
                 'mapped' => false,
                 'constraints' => [

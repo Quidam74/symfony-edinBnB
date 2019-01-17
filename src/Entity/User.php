@@ -61,7 +61,7 @@ class User implements UserInterface
     private $dateOfBirth;
 
     /**
-     * @ORM\Column(type="string", length=60)
+     * @ORM\Column(type="string", length=255)
      * @Groups({"user"})
      * @MaxDepth(1)
      */
