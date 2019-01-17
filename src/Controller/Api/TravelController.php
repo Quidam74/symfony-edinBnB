@@ -29,7 +29,7 @@ class TravelController extends AbstractController
     /**
      * @Route("/api/travels", methods={ "POST" })
      */
-    public function createTravel(Request, $request) {
+    public function createTravel(Request $request) {
         $travel = new Travel();
 
         $manager = $this->getDoctrine()->getManager();
@@ -63,7 +63,16 @@ class TravelController extends AbstractController
      * @Route("/api/travel/{travelId}", methods={ "GET" }, requirements={"travelId"="\d+"})
      */
     public function readTravel($travelId) {
-        return "Not implemented yet.";
+        $repository = $this->getDoctrine()->getRepository(Travel::class);
+
+        // Find the Travel with id $travelId.
+        $travel = $repository->find($travelId);
+
+        // Parse Object to jsonString.
+        $serializer = $this->container->get('serializer');
+        $reports = $serializer->serialize($travel, 'json');
+
+        return new Response($reports);
     }
 
     /**
