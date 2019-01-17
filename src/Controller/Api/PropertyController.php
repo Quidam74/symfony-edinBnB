@@ -66,7 +66,7 @@ class PropertyController extends AbstractController
     }
 
     /**
-     * @Route("/api/properties/{propertyId}", methods={ "GET" }, requirements={"propertyId"="\d+"})
+     * @Route("/api/property/{propertyId}", methods={ "GET" }, requirements={"propertyId"="\d+"})
      */
     public function readProperty($propertyId)
     {
@@ -85,7 +85,7 @@ class PropertyController extends AbstractController
     }
 
     /**
-     * @Route("/api/properties/{propertyId}", methods={ "PUT" }, requirements={"propertyId"="\d+"})
+     * @Route("/api/property/{propertyId}", methods={ "PUT" }, requirements={"propertyId"="\d+"})
      */
     public function updateProperty(Request $request, $propertyId)
     {
@@ -124,7 +124,7 @@ class PropertyController extends AbstractController
     }
 
     /**
-     * @Route("/api/properties/{propertyId}", methods={ "DELETE" }, requirements={"propertyId"="\d+"})
+     * @Route("/api/property/{propertyId}", methods={ "DELETE" }, requirements={"propertyId"="\d+"})
      */
     public function deleteProperty($propertyId)
     {
