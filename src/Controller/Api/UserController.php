@@ -115,6 +115,15 @@ class UserController extends AbstractController
      * @Route("/api/user/{userId}", methods={ "DELETE" }, requirements={"userId"="\d+"})
      */
     public function deleteUser($userId) {
-        return "Not implemented yet.";
+        $manager = $this->getDoctrine()->getManager();
+        $repository = $this->getDoctrine()->getRepository(User::class);
+        // Find the User with id $userId.
+        $user = $repository->find($userId);
+
+        // Remove the User.
+        $manager->remove($user);
+        $manager->flush();
+
+        return new JsonResponse(array("message" => "Successfully deleted."));
     }
 }
