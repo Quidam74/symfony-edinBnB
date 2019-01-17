@@ -16,10 +16,14 @@
 @import "components/page";
 @import "components/hero";
 @import "components/property";
+@import "components/listing";
 
 
 
 
+body {
+  display: flex;
+}
 
 
 

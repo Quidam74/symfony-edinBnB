@@ -5,9 +5,16 @@
 {% block body %}
     <section class="listing">
 
-        {% for propertie in properties %}
+        {% for property in properties %}
 
-{{ dump(propertie) }}
+            <article class="listing-oneProperty">
+                <h1 class="listing-title">{{ property.address.city~" :  "~ property.address.complement }}</h1>
+                {% set image = property.pictures.first() %}
+                <img class="listing-img" src="{{ image ? image.url }}">
+
+            </article>
+
+
         {% endfor %}
     </section>
 {% endblock %}
