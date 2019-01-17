@@ -15,14 +15,14 @@ class Day
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"out"})
+     * @Groups({"availability"})
      * @MaxDepth(1)
      */
     private $id;
 
     /**
      * @ORM\Column(type="date")
-     * @Groups({"out"})
+     * @Groups({"availability"})
      * @MaxDepth(1)
      */
     private $day;

@@ -17,7 +17,7 @@ class Property
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"user"})
+     * @Groups({"user", "availability"})
      * @MaxDepth(1)
      */
     private $id;

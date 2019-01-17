@@ -23,7 +23,7 @@ class AvailabilityController extends AbstractController
 
         // Parse Object to jsonString.
         $serializer = $this->container->get('serializer');
-        $reports = $serializer->serialize($availabilities, 'json');
+        $reports = $serializer->serialize($availabilities, 'json', ['groups' => 'availability']);
 
         $response = new Response($reports);
         $response->headers->set("Content-Type", "application/json");
@@ -52,7 +52,7 @@ class AvailabilityController extends AbstractController
             $manager->flush();
 
             $serializer = $this->container->get('serializer');
-            $reports = $serializer->serialize($availability, 'json');
+            $reports = $serializer->serialize($availability, 'json', ['groups' => 'availability']);
 
             // Return the created Availability.
             $response = new Response($reports);
@@ -78,7 +78,7 @@ class AvailabilityController extends AbstractController
 
         // Parse Object to jsonString.
         $serializer = $this->container->get('serializer');
-        $reports = $serializer->serialize($availability, 'json');
+        $reports = $serializer->serialize($availability, 'json', ['groups' => 'availability']);
 
         $response = new Response($reports);
         $response->headers->set("Content-Type", "application/json");
@@ -110,7 +110,7 @@ class AvailabilityController extends AbstractController
 
             // Parse Object to jsonString.
             $serializer = $this->container->get('serializer');
-            $reports = $serializer->serialize($availability, 'json');
+            $reports = $serializer->serialize($availability, 'json', ['groups' => 'availability']);
 
             // Return the created Availability.
             $response = new Response($reports);

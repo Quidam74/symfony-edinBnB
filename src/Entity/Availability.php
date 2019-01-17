@@ -15,21 +15,21 @@ class Availability
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"out"})
+     * @Groups({"availability"})
      * @MaxDepth(1)
      */
     private $id;
 
     /**
      * @ORM\Column(type="boolean")
-     * @Groups({"out"})
+     * @Groups({"availability"})
      * @MaxDepth(1)
      */
     private $isAvailable;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Day", cascade={"persist"})
-     * @Groups({"out"})
+     * @Groups({"availability"})
      * @MaxDepth(1)
      */
     private $day;
@@ -37,7 +37,7 @@ class Availability
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Property")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"out"})
+     * @Groups({"availability"})
      * @MaxDepth(1)
      */
     private $property;
