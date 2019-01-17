@@ -63,7 +63,16 @@ class EquipmentController extends AbstractController
      * @Route("/api/equipment/{equipmentId}", methods={ "GET" }, requirements={"equipmentId"="\d+"})
      */
     public function readEquipment($equipmentId) {
-        return "Not implemented yet.";
+            $repository = $this->getDoctrine()->getRepository(Equipment::class);
+
+            // Find the Equipment with id $equipmentId.
+            $equipment = $repository->find($equipmentId);
+
+            // Parse Object to jsonString.
+            $serializer = $this->container->get('serializer');
+            $reports = $serializer->serialize($equipment, 'json');
+
+            return new Response($reports);
     }
 
     /**
