@@ -22,9 +22,11 @@ class PropertyController extends AbstractController
         $properties = $repository->findAll();
 
         $serializer = $this->container->get('serializer');
-        $reports = $serializer->serialize($properties, 'json');
+        $reports = $serializer->serialize($properties, 'json', ['groups' => 'property']);
 
-        return new Response($reports);
+        $response = new Response($reports);
+        $response->headers->set("Content-Type", "application/json");
+        return $response;
     }
 
     /**
@@ -49,10 +51,12 @@ class PropertyController extends AbstractController
             $manager->flush();
 
             $serializer = $this->container->get('serializer');
-            $reports = $serializer->serialize($property, 'json');
+            $reports = $serializer->serialize($property, 'json', ['groups' => 'property']);
 
             // Return the created Property.
-            return new Response($reports);
+            $response = new Response($reports);
+            $response->headers->set("Content-Type", "application/json");
+            return $response;
         }
 
         // Else return an error.
@@ -62,7 +66,7 @@ class PropertyController extends AbstractController
     }
 
     /**
-     * @Route("/api/properties/{propertyId}", methods={ "GET" }, requirements={"propertyId"="\d+"})
+     * @Route("/api/property/{propertyId}", methods={ "GET" }, requirements={"propertyId"="\d+"})
      */
     public function readProperty($propertyId)
     {
@@ -73,13 +77,15 @@ class PropertyController extends AbstractController
 
         // Parse Object to jsonString.
         $serializer = $this->container->get('serializer');
-        $reports = $serializer->serialize($property, 'json');
+        $reports = $serializer->serialize($property, 'json', ['groups' => 'property']);
 
-        return new Response($reports);
+        $response = new Response($reports);
+        $response->headers->set("Content-Type", "application/json");
+        return $response;
     }
 
     /**
-     * @Route("/api/properties/{propertyId}", methods={ "PUT" }, requirements={"propertyId"="\d+"})
+     * @Route("/api/property/{propertyId}", methods={ "PUT" }, requirements={"propertyId"="\d+"})
      */
     public function updateProperty(Request $request, $propertyId)
     {
@@ -103,10 +109,12 @@ class PropertyController extends AbstractController
 
             // Parse Object to jsonString.
             $serializer = $this->container->get('serializer');
-            $reports = $serializer->serialize($property, 'json');
+            $reports = $serializer->serialize($property, 'json', ['groups' => 'property']);
 
             // Return the created Property.
-            return new Response($reports);
+            $response = new Response($reports);
+            $response->headers->set("Content-Type", "application/json");
+            return $response;
         }
 
         // Else return an error.
@@ -116,7 +124,7 @@ class PropertyController extends AbstractController
     }
 
     /**
-     * @Route("/api/properties/{propertyId}", methods={ "DELETE" }, requirements={"propertyId"="\d+"})
+     * @Route("/api/property/{propertyId}", methods={ "DELETE" }, requirements={"propertyId"="\d+"})
      */
     public function deleteProperty($propertyId)
     {

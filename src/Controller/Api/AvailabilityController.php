@@ -23,9 +23,11 @@ class AvailabilityController extends AbstractController
 
         // Parse Object to jsonString.
         $serializer = $this->container->get('serializer');
-        $reports = $serializer->serialize($availabilities, 'json');
+        $reports = $serializer->serialize($availabilities, 'json', ['groups' => 'availability']);
 
-        return new Response($reports);
+        $response = new Response($reports);
+        $response->headers->set("Content-Type", "application/json");
+        return $response;
     }
 
     /**
@@ -50,10 +52,12 @@ class AvailabilityController extends AbstractController
             $manager->flush();
 
             $serializer = $this->container->get('serializer');
-            $reports = $serializer->serialize($availability, 'json');
+            $reports = $serializer->serialize($availability, 'json', ['groups' => 'availability']);
 
             // Return the created Availability.
-            return new Response($reports);
+            $response = new Response($reports);
+            $response->headers->set("Content-Type", "application/json");
+            return $response;
         }
 
         // Else return an error.
@@ -74,9 +78,11 @@ class AvailabilityController extends AbstractController
 
         // Parse Object to jsonString.
         $serializer = $this->container->get('serializer');
-        $reports = $serializer->serialize($availability, 'json');
+        $reports = $serializer->serialize($availability, 'json', ['groups' => 'availability']);
 
-        return new Response($reports);
+        $response = new Response($reports);
+        $response->headers->set("Content-Type", "application/json");
+        return $response;
     }
 
     /**
@@ -104,10 +110,12 @@ class AvailabilityController extends AbstractController
 
             // Parse Object to jsonString.
             $serializer = $this->container->get('serializer');
-            $reports = $serializer->serialize($availability, 'json');
+            $reports = $serializer->serialize($availability, 'json', ['groups' => 'availability']);
 
             // Return the created Availability.
-            return new Response($reports);
+            $response = new Response($reports);
+            $response->headers->set("Content-Type", "application/json");
+            return $response;
         }
 
         // Else return an error.

@@ -22,9 +22,11 @@ class TravelController extends AbstractController
         $travel = $repository->findAll();
 
         $serializer = $this->container->get('serializer');
-        $reports = $serializer->serialize($travel, 'json');
+        $reports = $serializer->serialize($travel, 'json', ['groups' => 'travel']);
 
-        return new Response($reports);
+        $response = new Response($reports);
+        $response->headers->set("Content-Type", "application/json");
+        return $response;
     }
 
     /**
@@ -49,10 +51,12 @@ class TravelController extends AbstractController
             $manager->flush();
 
             $serializer = $this->container->get('serializer');
-            $reports = $serializer->serialize($travel, 'json');
+            $reports = $serializer->serialize($travel, 'json', ['groups' => 'travel']);
 
             // Return the created Travel.
-            return new Response($reports);
+            $response = new Response($reports);
+            $response->headers->set("Content-Type", "application/json");
+            return $response;
         }
 
         // Else return an error.
@@ -73,9 +77,11 @@ class TravelController extends AbstractController
 
         // Parse Object to jsonString.
         $serializer = $this->container->get('serializer');
-        $reports = $serializer->serialize($travel, 'json');
+        $reports = $serializer->serialize($travel, 'json', ['groups' => 'travel']);
 
-        return new Response($reports);
+        $response = new Response($reports);
+        $response->headers->set("Content-Type", "application/json");
+        return $response;
     }
 
     /**
@@ -103,10 +109,12 @@ class TravelController extends AbstractController
 
             // Parse Object to jsonString.
             $serializer = $this->container->get('serializer');
-            $reports = $serializer->serialize($travel, 'json');
+            $reports = $serializer->serialize($travel, 'json', ['groups' => 'travel']);
 
             // Return the created Travel.
-            return new Response($reports);
+            $response = new Response($reports);
+            $response->headers->set("Content-Type", "application/json");
+            return $response;
         }
 
         // Else return an error.

@@ -25,7 +25,9 @@ class AddressController extends AbstractController
         $serializer = $this->container->get('serializer');
         $reports = $serializer->serialize($addresses, 'json');
 
-        return new Response($reports);
+        $response = new Response($reports);
+        $response->headers->set("Content-Type", "application/json");
+        return $response;
     }
 
     /**
@@ -53,7 +55,9 @@ class AddressController extends AbstractController
             $reports = $serializer->serialize($address, 'json');
 
             // Return the created Address.
-            return new Response($reports);
+            $response = new Response($reports);
+            $response->headers->set("Content-Type", "application/json");
+            return $response;
         }
 
         // Else return an error.
@@ -76,7 +80,9 @@ class AddressController extends AbstractController
         $serializer = $this->container->get('serializer');
         $reports = $serializer->serialize($address, 'json');
 
-        return new Response($reports);
+        $response = new Response($reports);
+        $response->headers->set("Content-Type", "application/json");
+        return $response;
     }
 
     /**
@@ -107,7 +113,9 @@ class AddressController extends AbstractController
             $reports = $serializer->serialize($address, 'json');
 
             // Return the created Address.
-            return new Response($reports);
+            $response = new Response($reports);
+            $response->headers->set("Content-Type", "application/json");
+            return $response;
         }
 
         // Else return an error.
