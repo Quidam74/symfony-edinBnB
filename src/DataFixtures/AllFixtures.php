@@ -10,6 +10,7 @@ namespace App\DataFixtures;
 
 
 use App\Entity\Address;
+use App\Entity\Picture;
 use App\Entity\User;
 use App\Entity\Property;
 use App\Entity\Day;
@@ -89,21 +90,43 @@ class AllFixtures extends Fixture
         $manager->persist($equipement3);
 
 
-        $bien = new Property();
+        $property = new Property();
 
-        $bien->setBedCount(4);
-        $bien->setDescription("Freshly decorated spacious home with garden.");
-        $bien->setBedRoomCount(2);
-        $bien->setPersonCount(5);
-        $bien->setBathRoomCount(1);
-        $bien->setPrice(58);
-        $bien->setUser($owner);
-        $bien->addEquipment($equipement1);
-        $bien->addEquipment($equipement2);
-        $bien->setAddress($adresseProperty);
+        $property->setBedCount(4);
+        $property->setDescription("Freshly decorated spacious home with garden.");
+        $property->setBedRoomCount(2);
+        $property->setPersonCount(5);
+        $property->setBathRoomCount(1);
+        $property->setPrice(58);
+        $property->setUser($owner);
+        $property->addEquipment($equipement1);
+        $property->addEquipment($equipement2);
+        $property->setAddress($adresseProperty);
+
+        $manager->persist($property);
 
 
-        $manager->persist($bien);
+        $picture1= new Picture();
+        $picture2= new Picture();
+        $picture3= new Picture();
+
+        $picture1->setUrl("web/static/img/img1.jpg");
+        $picture1->setProperty($property);
+        $picture1->setDescription("image from my air BNB");
+
+        $picture2->setUrl("web/static/img/img2.jpg");
+        $picture2->setProperty($property);
+        $picture2->setDescription("image from my air BNB");
+
+        $picture3->setUrl("web/static/img/img3.jpg");
+        $picture3->setProperty($property);
+        $picture3->setDescription("image from my air BNB");
+
+        $manager->persist($picture1);
+        $manager->persist($picture2);
+        $manager->persist($picture3);
+
+
 
         $day = new \DateTime("01-01-2019");
 
