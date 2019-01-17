@@ -115,6 +115,15 @@ class TravelController extends AbstractController
      * @Route("/api/travel/{travelId}", methods={ "DELETE" }, requirements={"travelId"="\d+"})
      */
     public function deleteTravel($travelId) {
-        return "Not implemented yet.";
+        $manager = $this->getDoctrine()->getManager();
+        $repository = $this->getDoctrine()->getRepository(Travel::class);
+        // Find the Travel with id $travelId.
+        $travel = $repository->find($travelId);
+
+        // Remove the Travel.
+        $manager->remove($travel);
+        $manager->flush();
+
+        return new JsonResponse(array("message" => "Successfully deleted."));
     }
 }
