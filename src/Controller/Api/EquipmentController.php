@@ -115,6 +115,15 @@ class EquipmentController extends AbstractController
      * @Route("/api/equipment/{equipmentId}", methods={ "DELETE" }, requirements={"equipmentId"="\d+"})
      */
     public function deleteEquipment($equipmentId) {
-        return "Not implemented yet.";
+        $manager = $this->getDoctrine()->getManager();
+        $repository = $this->getDoctrine()->getRepository(Equipment::class);
+        // Find the Equipment with id $equipmentId.
+        $equipment = $repository->find($equipmentId);
+
+        // Remove the Equipment.
+        $manager->remove($equipment);
+        $manager->flush();
+
+        return new JsonResponse(array("message" => "Successfully deleted."));
     }
 }
