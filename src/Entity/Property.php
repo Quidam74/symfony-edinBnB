@@ -74,11 +74,17 @@ class Property
      */
     private $user;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Travel", mappedBy="property")
+     */
+    private $travels;
+
     public function __construct()
     {
         $this->pictures = new ArrayCollection();
         $this->availabilities = new ArrayCollection();
         $this->equipments = new ArrayCollection();
+        $this->travels = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -270,4 +276,34 @@ class Property
         return $this;
     }
 
+    /**
+     * @return Collection|Travel[]
+     */
+    public function getTravels(): Collection
+    {
+        return $this->travels;
+    }
+
+    public function addTravel(Travel $travel): self
+    {
+        if (!$this->travels->contains($travel)) {
+            $this->travels[] = $travel;
+            $travel->setProperty($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTravel(Travel $travel): self
+    {
+        if ($this->travels->contains($travel)) {
+            $this->travels->removeElement($travel);
+            // set the owning side to null (unless already changed)
+            if ($travel->getProperty() === $this) {
+                $travel->setProperty(null);
+            }
+        }
+
+        return $this;
+    }
 }

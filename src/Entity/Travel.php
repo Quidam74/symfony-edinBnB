@@ -25,9 +25,15 @@ class Travel
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(nullable=false)
      */
     private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Property")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $property;
 
     public function __construct()
     {
@@ -77,4 +83,15 @@ class Travel
         return $this;
     }
 
+    public function getProperty(): ?Property
+    {
+        return $this->property;
+    }
+
+    public function setProperty(?Property $property): self
+    {
+        $this->property = $property;
+
+        return $this;
+    }
 }
