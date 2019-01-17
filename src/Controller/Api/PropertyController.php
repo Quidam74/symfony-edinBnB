@@ -37,7 +37,16 @@ class PropertyController extends AbstractController
      * @Route("/api/properties/{propertyId}", methods={ "GET" }, requirements={"propertyId"="\d+"})
      */
     public function readProperty($propertyId) {
-        return "Not implemented yet.";
+        $repository = $this->getDoctrine()->getRepository(Property::class);
+
+        // Find the Property with id $propertyId.
+        $property = $repository->find($propertyId);
+
+        // Parse Object to jsonString.
+        $serializer = $this->container->get('serializer');
+        $reports = $serializer->serialize($property, 'json');
+
+        return new Response($reports);
     }
 
     /**
