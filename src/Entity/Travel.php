@@ -17,14 +17,14 @@ class Travel
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"user", "property"})
+     * @Groups({"user", "property", "travel"})
      * @MaxDepth(1)
      */
     private $id;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Day", cascade={"persist"})
-     * @Groups({"out"})
+     * @Groups({"travel"})
      * @MaxDepth(1)
      */
     private $days;
@@ -32,7 +32,7 @@ class Travel
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"out"})
+     * @Groups({"travel"})
      * @MaxDepth(1)
      */
     private $user;
@@ -40,7 +40,7 @@ class Travel
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Property")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"out"})
+     * @Groups({"travel"})
      * @MaxDepth(1)
      */
     private $property;

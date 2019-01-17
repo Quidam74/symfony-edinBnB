@@ -22,7 +22,7 @@ class TravelController extends AbstractController
         $travel = $repository->findAll();
 
         $serializer = $this->container->get('serializer');
-        $reports = $serializer->serialize($travel, 'json');
+        $reports = $serializer->serialize($travel, 'json', ['groups' => 'travel']);
 
         $response = new Response($reports);
         $response->headers->set("Content-Type", "application/json");
@@ -51,7 +51,7 @@ class TravelController extends AbstractController
             $manager->flush();
 
             $serializer = $this->container->get('serializer');
-            $reports = $serializer->serialize($travel, 'json');
+            $reports = $serializer->serialize($travel, 'json', ['groups' => 'travel']);
 
             // Return the created Travel.
             $response = new Response($reports);
@@ -77,7 +77,7 @@ class TravelController extends AbstractController
 
         // Parse Object to jsonString.
         $serializer = $this->container->get('serializer');
-        $reports = $serializer->serialize($travel, 'json');
+        $reports = $serializer->serialize($travel, 'json', ['groups' => 'travel']);
 
         $response = new Response($reports);
         $response->headers->set("Content-Type", "application/json");
@@ -109,7 +109,7 @@ class TravelController extends AbstractController
 
             // Parse Object to jsonString.
             $serializer = $this->container->get('serializer');
-            $reports = $serializer->serialize($travel, 'json');
+            $reports = $serializer->serialize($travel, 'json', ['groups' => 'travel']);
 
             // Return the created Travel.
             $response = new Response($reports);
