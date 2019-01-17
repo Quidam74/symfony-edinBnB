@@ -6,8 +6,31 @@
     <link rel="stylesheet" href="{{ asset('web/css/main.css') }}"/>
 </head>
 <body>
-{% block body %}{% endblock %}
+    {# If no user are connected, display register/login buttons. #}
+    {% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        <div>
+            <form action="{{ path('app_register') }}" method='post'>
+                <input type='submit' name='Register' value='Register'>
+            </form>
 
-<script src="{{ asset('web/js/main.js') }}"></script>
+            <form action="{{ path('app_login') }}" method='post'>
+                <input type='submit' name='Login' value='Login'>
+            </form>
+        </div>
+    {% endif %}
+
+    {# If user are connected, display his username and logout button. #}
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        <div>
+            <p><a id="username" href="">{{ app.user.username }}</a></p>
+            <form action="{{ path('app_logout') }}" method='post'>
+                <input type="submit" name="Logout" value="Logout">
+            </form>
+        </div>
+    {% endif %}
+
+    {% block body %}{% endblock %}
+
+    <script src="{{ asset('web/js/main.js') }}"></script>
 </body>
 </html>
