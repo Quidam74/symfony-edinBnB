@@ -25,7 +25,9 @@ class AvailabilityController extends AbstractController
         $serializer = $this->container->get('serializer');
         $reports = $serializer->serialize($availabilities, 'json');
 
-        return new Response($reports);
+        $response = new Response($reports);
+        $response->headers->set("Content-Type", "application/json");
+        return $response;
     }
 
     /**
@@ -53,7 +55,9 @@ class AvailabilityController extends AbstractController
             $reports = $serializer->serialize($availability, 'json');
 
             // Return the created Availability.
-            return new Response($reports);
+            $response = new Response($reports);
+            $response->headers->set("Content-Type", "application/json");
+            return $response;
         }
 
         // Else return an error.
@@ -76,7 +80,9 @@ class AvailabilityController extends AbstractController
         $serializer = $this->container->get('serializer');
         $reports = $serializer->serialize($availability, 'json');
 
-        return new Response($reports);
+        $response = new Response($reports);
+        $response->headers->set("Content-Type", "application/json");
+        return $response;
     }
 
     /**
@@ -107,7 +113,9 @@ class AvailabilityController extends AbstractController
             $reports = $serializer->serialize($availability, 'json');
 
             // Return the created Availability.
-            return new Response($reports);
+            $response = new Response($reports);
+            $response->headers->set("Content-Type", "application/json");
+            return $response;
         }
 
         // Else return an error.

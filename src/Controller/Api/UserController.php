@@ -24,7 +24,9 @@ class UserController extends AbstractController
         $serializer = $this->container->get('serializer');
         $reports = $serializer->serialize($users, 'json');
 
-        return new Response($reports);
+        $response = new Response($reports);
+        $response->headers->set("Content-Type", "application/json");
+        return $response;
     }
 
     /**
@@ -52,7 +54,9 @@ class UserController extends AbstractController
             $reports = $serializer->serialize($user, 'json');
 
             // Return the created User.
-            return new Response($reports);
+            $response = new Response($reports);
+            $response->headers->set("Content-Type", "application/json");
+            return $response;
         }
 
         // Else return an error.
@@ -75,7 +79,9 @@ class UserController extends AbstractController
         $serializer = $this->container->get('serializer');
         $reports = $serializer->serialize($user, 'json');
 
-        return new Response($reports);
+        $response = new Response($reports);
+        $response->headers->set("Content-Type", "application/json");
+        return $response;
     }
 
     /**
@@ -106,7 +112,9 @@ class UserController extends AbstractController
             $reports = $serializer->serialize($user, 'json');
 
             // Return the created User.
-            return new Response($reports);
+            $response = new Response($reports);
+            $response->headers->set("Content-Type", "application/json");
+            return $response;
         }
 
         // Else return an error.
