@@ -3,7 +3,10 @@
 namespace App\Controller\Api;
 
 use App\Entity\Equipment;
+use App\Form\EquipmentType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -26,8 +29,34 @@ class EquipmentController extends AbstractController
     /**
      * @Route("/api/equipments", methods={ "POST" })
      */
-    public function createEquipment() {
-        return "Not implemented yet.";
+    public function createEquipment(Request $request) {
+        $equipment = new Equipment();
+
+        $manager = $this->getDoctrine()->getManager();
+        // Get the data of request.
+        $data = json_decode($request->getContent(), true);
+
+        // Create form without csrf protection.
+        $form = $this->createForm(EquipmentType::class, $equipment, array("csrf_protection" => false));
+        $form->handleRequest($request)
+            ->submit($data);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // If the request is valide, save the new Equipment.
+            $manager->persist($equipment);
+            $manager->flush();
+
+            $serializer = $this->container->get('serializer');
+            $reports = $serializer->serialize($equipment, 'json');
+
+            // Return the created Equipment.
+            return new Response($reports);
+        }
+
+        // Else return an error.
+        $response = new JsonResponse(array("message" => "Attribute(s) missing !"));
+        $response->setStatusCode(400);
+        return $response;
     }
 
     /**
