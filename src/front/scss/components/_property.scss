@@ -1,0 +1,74 @@
+
+.prop {
+  width: 70%;
+  margin: auto;
+  margin-top: 0px;
+
+}
+
+.property {
+  display: flex;
+  flex-direction: column;
+
+  &-title {
+    font-size: 46px;
+    margin: 30px;
+    text-align: center;
+  }
+
+  &-imgList{
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+  }
+  &-img {
+    max-width: 50%;
+    height: 500px ;
+    padding: 10px;
+    &:last-child{
+      max-width: 100%;
+      width: 100%;
+      height: auto;
+
+    }
+  }
+
+  &-description {
+    font-size: 20px;
+    margin: 30px;
+
+  }
+  &-introduceEquipement {
+    margin: 30px;
+  }
+
+  &-button {
+    font-size: 28px;
+    padding: 20px 30px;
+    margin: auto;
+    margin-right: 0px;
+    margin-top: 20px;
+    background-color: #9cfd94;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: opacity 0.3s ease-in-out;
+    &:hover {
+      opacity: 0.5;
+    }
+    // color: #5f55f9;
+  }
+
+}
+
+.carac {
+  margin-left: 30px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  &-elem {
+    font-size: 18px;
+  }
+}
+

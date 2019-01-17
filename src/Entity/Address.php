@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AddressRepository")
@@ -13,26 +15,36 @@ class Address
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"user", "property"})
+     * @MaxDepth(1)
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=60)
+     * @Groups({"user", "property"})
+     * @MaxDepth(1)
      */
     private $country;
 
     /**
      * @ORM\Column(type="string", length=60)
+     * @Groups({"user", "property"})
+     * @MaxDepth(1)
      */
     private $city;
 
     /**
      * @ORM\Column(type="string", length=60)
+     * @Groups({"user", "property"})
+     * @MaxDepth(1)
      */
     private $postCode;
 
     /**
      * @ORM\Column(type="string", length=150)
+     * @Groups({"user", "property"})
+     * @MaxDepth(1)
      */
     private $complement;
 

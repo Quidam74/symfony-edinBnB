@@ -5,6 +5,8 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -15,56 +17,78 @@ class User
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"user", "property", "travel"})
+     * @MaxDepth(1)
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=60)
+     * @Groups({"user"})
+     * @MaxDepth(1)
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=60)
+     * @Groups({"user"})
+     * @MaxDepth(1)
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="string", length=60)
+     * @Groups({"user"})
+     * @MaxDepth(1)
      */
     private $email;
 
     /**
      * @ORM\Column(type="date")
+     * @Groups({"user"})
+     * @MaxDepth(1)
      */
     private $dateOfBirth;
 
     /**
      * @ORM\Column(type="string", length=60)
+     * @Groups({"user"})
+     * @MaxDepth(1)
      */
     private $hashPassword;
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Groups({"user"})
+     * @MaxDepth(1)
      */
     private $bankingReference;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"user"})
+     * @MaxDepth(1)
      */
     private $isTraveler;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Address", cascade={"persist"})
+     * @Groups({"user"})
+     * @MaxDepth(1)
      */
     private $address;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Travel", mappedBy="user")
+     * @Groups({"user"})
+     * @MaxDepth(1)
      */
     private $travels;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Property", mappedBy="user")
+     * @Groups({"user"})
+     * @MaxDepth(1)
      */
     private $properties;
 

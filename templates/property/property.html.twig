@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réserver{% endblock %}
+
+{% block body %}
+<secion class="prop">
+
+    <article class="property">
+        <h1 class="property-title">{{ property.address.city~" :  "~ property.address.complement }}</h1>
+        <div class="property-imgList">
+            {% for img in property.pictures %}
+
+                <img class="property-img" src="../{{ img.url }}">
+
+            {% endfor %}
+        </div>
+
+
+        <p class="property-description">{{ property.description }}</p>
+
+        <p class="property-introduceEquipement">les différentes caractéristiques :</pclas>
+        <ul class="carac">
+            <li class="carac-elem carac-personne"> nombre de personne : <span>{{ property.personCount }}</span>
+            </li>
+            <li class="carac-elem carac-bedRoom"> nombre de chambre : <span>{{ property.bedRoomCount }}</span>
+            </li>
+            <li class="carac-elem carac-bed"> nombre de lit : <span>{{ property.bedCount }}</span></li>
+            <li class="carac-elem carac-bathRoom"> nombre de salle de bain :
+                <span>{{ property.bathRoomCount }}</span></li>
+        </ul>
+
+        <div class="property-button">Reserver</div>
+    </article>
+</secion>
+
+
+
+{% endblock %}
