@@ -12,7 +12,7 @@ var browserSync = require('browser-sync');
 var babelify = require('babelify');
 
 var webSRC = 'src/front';
-var webDIST = 'src/web';
+var webDIST = 'public/web';
 
 gulp.task('clean', () => {
     return gulp.src('./' + webDIST + '/', { read: false })

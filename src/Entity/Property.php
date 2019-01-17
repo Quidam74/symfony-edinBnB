@@ -65,7 +65,7 @@ class Property
     private $bathRoomCount;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Picture", mappedBy="property")
+     * @ORM\OneToMany(targetEntity="App\Entity\Picture", mappedBy="property", fetch="EAGER")
      * @Groups({"property"})
      * @MaxDepth(1)
      */

@@ -22,5 +22,5 @@
 
 **/node_modules
 
-src/web
+public/web
 src/.DS_Store
