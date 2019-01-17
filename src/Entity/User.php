@@ -62,7 +62,6 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"user"})
      * @MaxDepth(1)
      */
     private $hashPassword;
