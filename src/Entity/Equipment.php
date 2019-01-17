@@ -21,12 +21,6 @@ class Equipment
      */
     private $description;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Property")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $property;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -43,17 +37,4 @@ class Equipment
 
         return $this;
     }
-
-    public function getProperty(): ?Property
-    {
-        return $this->property;
-    }
-
-    public function setProperty(?Property $property): self
-    {
-        $this->property = $property;
-
-        return $this;
-    }
-
 }

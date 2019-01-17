@@ -64,7 +64,7 @@ class Property
     private $Availabilities;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Equipment", mappedBy="property")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Equipment")
      */
     private $equipments;
 
@@ -244,7 +244,6 @@ class Property
     {
         if (!$this->equipments->contains($equipment)) {
             $this->equipments[] = $equipment;
-            $equipment->setProperty($this);
         }
 
         return $this;
@@ -254,10 +253,6 @@ class Property
     {
         if ($this->equipments->contains($equipment)) {
             $this->equipments->removeElement($equipment);
-            // set the owning side to null (unless already changed)
-            if ($equipment->getProperty() === $this) {
-                $equipment->setProperty(null);
-            }
         }
 
         return $this;
@@ -274,5 +269,4 @@ class Property
 
         return $this;
     }
-
 }
