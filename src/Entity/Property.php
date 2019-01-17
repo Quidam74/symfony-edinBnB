@@ -61,7 +61,7 @@ class Property
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Availability", mappedBy="property")
      */
-    private $Availabilities;
+    private $availabilities;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Equipment")
@@ -77,7 +77,7 @@ class Property
     public function __construct()
     {
         $this->pictures = new ArrayCollection();
-        $this->Availabilities = new ArrayCollection();
+        $this->availabilities = new ArrayCollection();
         $this->equipments = new ArrayCollection();
     }
 
@@ -206,13 +206,13 @@ class Property
      */
     public function getAvailabilities(): Collection
     {
-        return $this->Availabilities;
+        return $this->availabilities;
     }
 
     public function addAvailability(Availability $availability): self
     {
-        if (!$this->Availabilities->contains($availability)) {
-            $this->Availabilities[] = $availability;
+        if (!$this->availabilities->contains($availability)) {
+            $this->availabilities[] = $availability;
             $availability->setProperty($this);
         }
 
@@ -221,8 +221,8 @@ class Property
 
     public function removeAvailability(Availability $availability): self
     {
-        if ($this->Availabilities->contains($availability)) {
-            $this->Availabilities->removeElement($availability);
+        if ($this->availabilities->contains($availability)) {
+            $this->availabilities->removeElement($availability);
             // set the owning side to null (unless already changed)
             if ($availability->getProperty() === $this) {
                 $availability->setProperty(null);
@@ -269,4 +269,5 @@ class Property
 
         return $this;
     }
+
 }
