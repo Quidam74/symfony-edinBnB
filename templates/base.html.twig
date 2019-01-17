@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="{{ asset('web/css/main.css') }}"/>
 </head>
 <body>
+    {# If no user are connected, display register/login buttons. #}
     {% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
         <div>
             <form action="{{ path('app_register') }}" method='post'>
@@ -18,6 +19,7 @@
         </div>
     {% endif %}
 
+    {# If user are connected, display his username and logout button. #}
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
         <div>
             <p><a id="username" href="">{{ app.user.username }}</a></p>
