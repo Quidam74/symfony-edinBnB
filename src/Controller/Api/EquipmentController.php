@@ -78,8 +78,37 @@ class EquipmentController extends AbstractController
     /**
      * @Route("/api/equipment/{equipmentId}", methods={ "PUT" }, requirements={"equipmentId"="\d+"})
      */
-    public function updateEquipment($equipmentId) {
-        return "Not implemented yet.";
+    public function updateEquipment(Request $request , $equipmentId) {
+        $repository = $this->getDoctrine()->getRepository(Equipment::class);
+        // Find the Equipment with id $equipmentId.
+        $equipment = $repository->find($equipmentId);
+
+        $manager = $this->getDoctrine()->getManager();
+        // Get the data of request.
+        $data = json_decode($request->getContent(), true);
+
+        $form = $this->createForm(EquipmentType::class, $equipment, array("csrf_protection" => false));
+        $form->handleRequest($request)
+            ->submit($data);
+
+        // Create form without csrf protection.
+        if ($form->isSubmitted() && $form->isValid()) {
+            // If the request is valide, save the new Equipment.
+            $manager->persist($equipment);
+            $manager->flush();
+
+            // Parse Object to jsonString.
+            $serializer = $this->container->get('serializer');
+            $reports = $serializer->serialize($equipment, 'json');
+
+            // Return the created Equipment.
+            return new Response($reports);
+        }
+
+        // Else return an error.
+        $response = new JsonResponse(array("message" => "Attribute(s) missing !"));
+        $response->setStatusCode(400);
+        return $response;
     }
 
     /**
