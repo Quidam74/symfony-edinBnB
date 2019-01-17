@@ -11,6 +11,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Address;
 use App\Entity\Availability;
+use App\Entity\Travel;
 use App\Entity\User;
 use App\Entity\Property;
 use App\Entity\Day;
@@ -123,6 +124,13 @@ class AllFixtures extends Fixture
         $availability->setProperty($bien);
 
         $manager->persist($availability);
+
+        $travel = new Travel();
+        $travel->setProperty($bien);
+        $travel->setUser($traveler);
+        $travel->addDay($jour);
+
+        $manager->persist($travel);
 
         $manager->flush();
     }
