@@ -63,7 +63,16 @@ class UserController extends AbstractController
      * @Route("/api/user/{userId}", methods={ "GET" }, requirements={"userId"="\d+"})
      */
     public function readUser($userId) {
-        return "Not implemented yet.";
+        $repository = $this->getDoctrine()->getRepository(User::class);
+
+        // Find the User with id $userId.
+        $user = $repository->find($userId);
+
+        // Parse Object to jsonString.
+        $serializer = $this->container->get('serializer');
+        $reports = $serializer->serialize($user, 'json');
+
+        return new Response($reports);
     }
 
     /**
