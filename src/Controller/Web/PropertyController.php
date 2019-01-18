@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\web;
+namespace App\Controller\Web;
 
 use App\Entity\Picture;
 use App\Entity\Property;
