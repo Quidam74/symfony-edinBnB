@@ -4,11 +4,8 @@ namespace App\Controller\Api;
 
 use App\Entity\Address;
 use App\Form\AddressType;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Response;
 
 class AddressController extends ApiRESTController
 {
