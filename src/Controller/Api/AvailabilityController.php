@@ -10,24 +10,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 
-class AvailabilityController extends AbstractController
+class AvailabilityController extends ApiRESTController
 {
     /**
      * @Route("/api/availabilities", methods={ "GET" })
      */
     public function listAvailability()
     {
-        $repository = $this->getDoctrine()->getRepository(Availability::class);
-
-        $availabilities = $repository->findAll();
-
-        // Parse Object to jsonString.
-        $serializer = $this->container->get('serializer');
-        $reports = $serializer->serialize($availabilities, 'json', ['groups' => 'availability']);
-
-        $response = new Response($reports);
-        $response->headers->set("Content-Type", "application/json");
-        return $response;
+        return $this->list(Availability::class, ['availability']);
     }
 
     /**
@@ -35,35 +25,7 @@ class AvailabilityController extends AbstractController
      */
     public function createAvailability(Request $request)
     {
-        $availability = new Availability();
-
-        $manager = $this->getDoctrine()->getManager();
-        // Get the data of request.
-        $data = json_decode($request->getContent(), true);
-
-        // Create form without csrf protection.
-        $form = $this->createForm(AvailabilityType::class, $availability, array("csrf_protection" => false));
-        $form->handleRequest($request)
-            ->submit($data);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            // If the request is valide, save the new Availability.
-            $manager->persist($availability);
-            $manager->flush();
-
-            $serializer = $this->container->get('serializer');
-            $reports = $serializer->serialize($availability, 'json', ['groups' => 'availability']);
-
-            // Return the created Availability.
-            $response = new Response($reports);
-            $response->headers->set("Content-Type", "application/json");
-            return $response;
-        }
-
-        // Else return an error.
-        $response = new JsonResponse(array("message" => "Attribute(s) missing !"));
-        $response->setStatusCode(400);
-        return $response;
+        return $this->create($request, AvailabilityType::class, Availability::class, ['availability']);
     }
 
     /**
@@ -71,18 +33,7 @@ class AvailabilityController extends AbstractController
      */
     public function readAvailability($availabilityId)
     {
-        $repository = $this->getDoctrine()->getRepository(Availability::class);
-
-        // Find the Availability with id $availabilityId.
-        $availability = $repository->find($availabilityId);
-
-        // Parse Object to jsonString.
-        $serializer = $this->container->get('serializer');
-        $reports = $serializer->serialize($availability, 'json', ['groups' => 'availability']);
-
-        $response = new Response($reports);
-        $response->headers->set("Content-Type", "application/json");
-        return $response;
+        return $this->read(Availability::class, $availabilityId, ['availability']);
     }
 
     /**
@@ -90,38 +41,7 @@ class AvailabilityController extends AbstractController
      */
     public function updateAvailability(Request $request, $availabilityId)
     {
-        $repository = $this->getDoctrine()->getRepository(Availability::class);
-        // Find the Availability with id $availabilityId.
-        $availability = $repository->find($availabilityId);
-
-        $manager = $this->getDoctrine()->getManager();
-        // Get the data of request.
-        $data = json_decode($request->getContent(), true);
-
-        $form = $this->createForm(AvailabilityType::class, $availability, array("csrf_protection" => false));
-        $form->handleRequest($request)
-            ->submit($data);
-
-        // Create form without csrf protection.
-        if ($form->isSubmitted() && $form->isValid()) {
-            // If the request is valide, save the new Availability.
-            $manager->persist($availability);
-            $manager->flush();
-
-            // Parse Object to jsonString.
-            $serializer = $this->container->get('serializer');
-            $reports = $serializer->serialize($availability, 'json', ['groups' => 'availability']);
-
-            // Return the created Availability.
-            $response = new Response($reports);
-            $response->headers->set("Content-Type", "application/json");
-            return $response;
-        }
-
-        // Else return an error.
-        $response = new JsonResponse(array("message" => "Attribute(s) missing !"));
-        $response->setStatusCode(400);
-        return $response;
+        return $this->update($request, AvailabilityType::class, Availability::class, $availabilityId, ['availability']);
     }
 
     /**
@@ -129,15 +49,6 @@ class AvailabilityController extends AbstractController
      */
     public function deleteAvailability($availabilityId)
     {
-        $manager = $this->getDoctrine()->getManager();
-        $repository = $this->getDoctrine()->getRepository(Availability::class);
-        // Find the Availability with id $availabilityId.
-        $availability = $repository->find($availabilityId);
-
-        // Remove the Availability.
-        $manager->remove($availability);
-        $manager->flush();
-
-        return new JsonResponse(array("message" => "Successfully deleted."));
+        return $this->delete(Availability::class, $availabilityId);
     }
 }

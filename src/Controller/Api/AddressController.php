@@ -42,7 +42,6 @@ class AddressController extends ApiRESTController
     public function updateAddress(Request $request, $addressId)
     {
         return $this->update($request, AddressType::class, Address::class, $addressId);
-
     }
 
     /**
