@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\web;
+namespace App\Controller\Web;
 
 use App\Entity\User;
 use App\Form\UserType;
