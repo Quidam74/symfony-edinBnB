@@ -26,6 +26,11 @@
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
         <div>
             <p><a id="username" href="">{{ app.user.username }}</a></p>
+
+            <form action="/user/{{ app.user.id }}" method='get'>
+                <input type="submit" name="profile" value="Consulter mon profil">
+            </form>
+
             <form action="{{ path('property_new') }}" method='post'>
                 <input type="submit" name="host" value="Créer un logement">
             </form>
