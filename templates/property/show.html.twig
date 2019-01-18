@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Property{% endblock %}
+
+{% block body %}
+    <h1>Property</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ property.id }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ property.description }}</td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>{{ property.price }}</td>
+            </tr>
+            <tr>
+                <th>BedRoomCount</th>
+                <td>{{ property.bedRoomCount }}</td>
+            </tr>
+            <tr>
+                <th>BedCount</th>
+                <td>{{ property.bedCount }}</td>
+            </tr>
+            <tr>
+                <th>PersonCount</th>
+                <td>{{ property.personCount }}</td>
+            </tr>
+            <tr>
+                <th>BathRoomCount</th>
+                <td>{{ property.bathRoomCount }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('properties') }}">Retour</a>
+
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        <a href="{{ path('property_edit', {'id': property.id}) }}">edit</a>
+        {{ include('property/_delete_form.html.twig') }}
+    {% endif %}
+
+
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Property index{% endblock %}
+
+{% block body %}
+    <h1>Les logements</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Price</th>
+                <th>BedRoomCount</th>
+                <th>BedCount</th>
+                <th>PersonCount</th>
+                <th>BathRoomCount</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for property in properties %}
+            <tr>
+                <td>{{ property.description }}</td>
+                <td>{{ property.price }}</td>
+                <td>{{ property.bedRoomCount }}</td>
+                <td>{{ property.bedCount }}</td>
+                <td>{{ property.personCount }}</td>
+                <td>{{ property.bathRoomCount }}</td>
+                <td>
+                    <a href="{{ path('property_show', {'id': property.id}) }}">show</a>
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        <a href="{{ path('property_edit', {'id': property.id}) }}">edit</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
