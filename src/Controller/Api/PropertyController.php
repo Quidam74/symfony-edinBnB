@@ -4,29 +4,17 @@ namespace App\Controller\Api;
 
 use App\Entity\Property;
 use App\Form\PropertyType;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Response;
 
-class PropertyController extends AbstractController
+class PropertyController extends ApiRESTController
 {
     /**
      * @Route("/api/properties", methods={ "GET" })
      */
     public function listProperty()
     {
-        $repository = $this->getDoctrine()->getRepository(Property::class);
-
-        $properties = $repository->findAll();
-
-        $serializer = $this->container->get('serializer');
-        $reports = $serializer->serialize($properties, 'json', ['groups' => 'property']);
-
-        $response = new Response($reports);
-        $response->headers->set("Content-Type", "application/json");
-        return $response;
+        return $this->list(Property::class, ['property']);
     }
 
     /**
@@ -34,35 +22,7 @@ class PropertyController extends AbstractController
      */
     public function createProperty(Request $request)
     {
-        $property = new Property();
-
-        $manager = $this->getDoctrine()->getManager();
-        // Get the data of request.
-        $data = json_decode($request->getContent(), true);
-
-        // Create form without csrf protection.
-        $form = $this->createForm(PropertyType::class, $property, array("csrf_protection" => false));
-        $form->handleRequest($request)
-            ->submit($data);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            // If the request is valide, save the new Property.
-            $manager->persist($property);
-            $manager->flush();
-
-            $serializer = $this->container->get('serializer');
-            $reports = $serializer->serialize($property, 'json', ['groups' => 'property']);
-
-            // Return the created Property.
-            $response = new Response($reports);
-            $response->headers->set("Content-Type", "application/json");
-            return $response;
-        }
-
-        // Else return an error.
-        $response = new JsonResponse(array("message" => "Attribute(s) missing !"));
-        $response->setStatusCode(400);
-        return $response;
+        return $this->create($request, PropertyType::class, Property::class, ['property']);
     }
 
     /**
@@ -70,18 +30,7 @@ class PropertyController extends AbstractController
      */
     public function readProperty($propertyId)
     {
-        $repository = $this->getDoctrine()->getRepository(Property::class);
-
-        // Find the Property with id $propertyId.
-        $property = $repository->find($propertyId);
-
-        // Parse Object to jsonString.
-        $serializer = $this->container->get('serializer');
-        $reports = $serializer->serialize($property, 'json', ['groups' => 'property']);
-
-        $response = new Response($reports);
-        $response->headers->set("Content-Type", "application/json");
-        return $response;
+        return $this->read(Property::class, $propertyId, ['property']);
     }
 
     /**
@@ -89,38 +38,7 @@ class PropertyController extends AbstractController
      */
     public function updateProperty(Request $request, $propertyId)
     {
-        $repository = $this->getDoctrine()->getRepository(Property::class);
-        // Find the Property with id $propertyId.
-        $property = $repository->find($propertyId);
-
-        $manager = $this->getDoctrine()->getManager();
-        // Get the data of request.
-        $data = json_decode($request->getContent(), true);
-
-        $form = $this->createForm(PropertyType::class, $property, array("csrf_protection" => false));
-        $form->handleRequest($request)
-            ->submit($data);
-
-        // Create form without csrf protection.
-        if ($form->isSubmitted() && $form->isValid()) {
-            // If the request is valide, save the new Property.
-            $manager->persist($property);
-            $manager->flush();
-
-            // Parse Object to jsonString.
-            $serializer = $this->container->get('serializer');
-            $reports = $serializer->serialize($property, 'json', ['groups' => 'property']);
-
-            // Return the created Property.
-            $response = new Response($reports);
-            $response->headers->set("Content-Type", "application/json");
-            return $response;
-        }
-
-        // Else return an error.
-        $response = new JsonResponse(array("message" => "Attribute(s) missing !"));
-        $response->setStatusCode(400);
-        return $response;
+        return $this->update($request, PropertyType::class, Property::class, $propertyId, ['property']);
     }
 
     /**
@@ -128,15 +46,6 @@ class PropertyController extends AbstractController
      */
     public function deleteProperty($propertyId)
     {
-        $manager = $this->getDoctrine()->getManager();
-        $repository = $this->getDoctrine()->getRepository(Property::class);
-        // Find the Property with id $propertyId.
-        $property = $repository->find($propertyId);
-
-        // Remove the Property.
-        $manager->remove($property);
-        $manager->flush();
-
-        return new JsonResponse(array("message" => "Successfully deleted."));
+        return $this->delete(Property::class, $propertyId);
     }
 }
