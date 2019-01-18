@@ -37,7 +37,6 @@ class Picture
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Property")
      * @ORM\JoinColumn(nullable=true)
-     * @Groups({"property"})
      * @MaxDepth(1)
      */
     private $property;
