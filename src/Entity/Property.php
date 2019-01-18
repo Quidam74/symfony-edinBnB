@@ -93,7 +93,7 @@ class Property
     private $equipments;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", cascade={"persist"})
      * @ORM\JoinColumn(nullable=true)
      * @Groups({"property"})
      * @MaxDepth(1)

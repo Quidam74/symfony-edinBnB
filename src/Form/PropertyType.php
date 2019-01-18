@@ -22,9 +22,9 @@ class PropertyType extends AbstractType
             ->add('bedCount', NumberType::class, ['required' => true, 'constraints' => [new NotNull()]])
             ->add('personCount', NumberType::class, ['required' => true, 'constraints' => [new NotNull()]])
             ->add('bathRoomCount', NumberType::class, ['required' => true, 'constraints' => [new NotNull()]])
-            ->add('address', AddressType::class)
-            ->add('equipments', EquipmentType::class)
-            ->add('user', UserType::class);
+            ->add('address', AddressType::class);
+//            ->add('equipments', EquipmentType::class)
+//            ->add('user', UserType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

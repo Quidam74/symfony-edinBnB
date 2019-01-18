@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}EdinBnB{% endblock %}</title>
-    <link rel="stylesheet" href="{{ asset('web/css/main.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('front/css/main.css') }}"/>
 </head>
 <body>
     {# If no user are connected, display register/login buttons. #}
@@ -16,6 +16,9 @@
             <form action="{{ path('app_login') }}" method='post'>
                 <input type='submit' name='Login' value='Login'>
             </form>
+            {#<form action="{{ path('housings') }}" method='post'>#}
+                {#<input type='submit' name='Logements' value='Logements'>#}
+            {#</form>#}
         </div>
     {% endif %}
 
@@ -23,14 +26,23 @@
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
         <div>
             <p><a id="username" href="">{{ app.user.username }}</a></p>
+
+            <form action="/user/{{ app.user.id }}" method='get'>
+                <input type="submit" name="profile" value="Consulter mon profil">
+            </form>
+
+            <form action="{{ path('property_new') }}" method='post'>
+                <input type="submit" name="host" value="Créer un logement">
+            </form>
             <form action="{{ path('app_logout') }}" method='post'>
                 <input type="submit" name="Logout" value="Logout">
             </form>
+
         </div>
     {% endif %}
 
     {% block body %}{% endblock %}
 
-    <script src="{{ asset('web/js/main.js') }}"></script>
+    <script src="{{ asset('front/js/main.js') }}"></script>
 </body>
 </html>
