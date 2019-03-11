@@ -9,6 +9,7 @@
   "license": "MIT",
   "dependencies": {
     "gsap": "^1.20.4",
+    "natives": "^1.1.6",
     "ua-parser-js": "^0.7.17"
   },
   "devDependencies": {
