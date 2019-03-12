@@ -4,6 +4,7 @@ namespace App\Controller\Web;
 
 use App\Entity\Picture;
 use App\Entity\NodeVisitor;
+use App\Entity\NodeProperty;
 use App\Entity\Property;
 use App\Repository\PictureRepository;
 use App\Repository\PropertyRepository;
@@ -34,9 +35,25 @@ class PropertyController extends AbstractController
     /**
      * @Route("/property/{propertyId}", name="property", requirements={"propertyId"="\d+"})
      */
-    public function index(PropertyRepository $propertyRepository, $propertyId)
+    public function index(PropertyRepository $propertyRepository, $propertyId, EntityManagerInterface $emi)
     {
         $property = $propertyRepository->findOneBy(['id'=> $propertyId]);
+
+        // Check if the property is already save in neao4j.
+        $nodeProperty = $emi->getRepository(NodeProperty::class)->findOneBy(['idProperty' => $property->getId()]);
+
+        if (!$nodeProperty) {
+            // Save property.
+            $nodeProperty = new NodeProperty(
+                $property->getDescription(),
+                $property->getAddress()->getComplement(),
+                $property->getId());
+    
+            $emi->persist($nodeProperty);
+            $emi->flush();
+        }
+
+        // TODO: Set relation between visitor and this property.
 
         return $this->render('property/property.html.twig', [
             'controller_name' => 'ListingController',
