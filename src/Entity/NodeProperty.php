@@ -2,7 +2,10 @@
 
 namespace App\Entity;
 
+use App\Entity\NodeVisitor;
+use App\Entity\VisitorConsultProperty;
 use GraphAware\Neo4j\OGM\Annotations as OGM;
+use GraphAware\Neo4j\OGM\Common\Collection;
 
 /**
  * @OGM\Node(label="Property")
@@ -21,10 +24,18 @@ class NodeProperty {
     /** @OGM\Property(type="int") */
     protected $idProperty;
 
+    /**
+    * @var VisitorConsultProperty[]|Collection
+    *
+     * @OGM\Relationship(relationshipEntity="VisitorConsultProperty", type="CONSULT", direction="OUTGOING", collection=true, mappedBy="property")
+    */
+   protected $consults;
+
     public function __construct(string $description, string $address, int $idProperty) {
         $this->description = $description;
         $this->address = $address;
         $this->idProperty = $idProperty;
+        $this->consults = new Collection();
     }
 
     /**
@@ -89,5 +100,31 @@ class NodeProperty {
     public function setIdProperty($idProperty): void
     {
         $this->idProperty = $idProperty;
+    }
+
+    /**
+     * @return Collection|VisitorConsultProperty[]
+     */
+    public function getConsults()
+    {
+        return $this->consults;
+    }
+
+    public function addConsult(VisitorConsultProperty $consult): self
+    {
+        if (!$this->consults->contains($consult)) {
+            $this->consults[] = $consult;
+        }
+
+        return $this;
+    }
+
+    public function removeConsult(VisitorConsultProperty $consult): self
+    {
+        if ($this->consults->contains($consult)) {
+            $this->consults->removeElement($consult);
+        }
+
+        return $this;
     }
 }

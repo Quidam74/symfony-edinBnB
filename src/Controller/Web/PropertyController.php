@@ -6,6 +6,7 @@ use App\Entity\Picture;
 use App\Entity\NodeVisitor;
 use App\Entity\NodeProperty;
 use App\Entity\Property;
+use App\Entity\VisitorConsultProperty;
 use App\Repository\PictureRepository;
 use App\Repository\PropertyRepository;
 use GraphAware\Neo4j\OGM\EntityManager;
@@ -22,7 +23,7 @@ class PropertyController extends AbstractController
      */
     public function returnListProperties(PropertyRepository $propertyRepository, EntityManagerInterface $emi)
     {
-        $this->manageVisitor($emi);
+        $this->getVisitor($emi);
 
         $properties = $propertyRepository->findAll();
 
@@ -48,12 +49,12 @@ class PropertyController extends AbstractController
                 $property->getDescription(),
                 $property->getAddress()->getComplement(),
                 $property->getId());
-    
+
             $emi->persist($nodeProperty);
-            $emi->flush();
         }
 
-        // TODO: Set relation between visitor and this property.
+        $visitor = $this->getVisitor($emi);
+        $visitor->visitProperty($nodeProperty, $emi);
 
         return $this->render('property/property.html.twig', [
             'controller_name' => 'ListingController',
@@ -61,7 +62,8 @@ class PropertyController extends AbstractController
         ]);
     }
 
-    private function manageVisitor(EntityManagerInterface $emi): Void {
+    private function getVisitor (EntityManagerInterface $emi): NodeVisitor
+    {
         // Create the visitor name session.
         $visitorName = uniqid();
 
@@ -74,12 +76,17 @@ class PropertyController extends AbstractController
         // Check if the visitor is already saved.
         $visitor = $emi->getRepository(NodeVisitor::class)->findOneBy(['name' => $visitorName]);
 
-        if (!$visitor) {
-            // Resiter the new visitor.
-            $newVisitor = new NodeVisitor($visitorName, 21);
+        var_dump($visitor);
+        die();
 
-            $emi->persist($newVisitor);
+        /* if (!$visitor) {
+            // Resiter the new visitor.
+            $visitor = new NodeVisitor($visitorName, 21);
+
+            $emi->persist($visitor);
             $emi->flush();
-        }
+        } */
+
+        return $visitor;
     }
 }
