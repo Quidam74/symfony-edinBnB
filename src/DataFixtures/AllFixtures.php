@@ -51,6 +51,21 @@ class AllFixtures extends Fixture
         $adresseProperty->setComplement("123 rue de l'arc-en-ciel");
         $manager->persist($adresseProperty);
 
+        $adresseProperty2 = new Address();
+
+        $adresseProperty2->setPostCode("74000");
+        $adresseProperty2->setCountry("France");
+        $adresseProperty2->setCity("Mégevette");
+        $adresseProperty2->setComplement("123 rue de l'arc-en-ciel");
+        $manager->persist($adresseProperty2);
+        $adresseProperty3 = new Address();
+
+        $adresseProperty3->setPostCode("74000");
+        $adresseProperty3->setCountry("France");
+        $adresseProperty3->setCity("Etaux");
+        $adresseProperty3->setComplement("123 rue de l'arc-en-ciel");
+        $manager->persist($adresseProperty3);
+
         $owner = new User();
         $owner->setFirstName("paul");
         $owner->setLastName("durant");
@@ -106,6 +121,36 @@ class AllFixtures extends Fixture
         $property->setAddress($adresseProperty);
 
         $manager->persist($property);
+
+        $property2 = new Property();
+
+        $property2->setBedCount(4);
+        $property2->setDescription("Freshly decorated spacious home with garden.");
+        $property2->setBedRoomCount(4);
+        $property2->setPersonCount(10);
+        $property2->setBathRoomCount(1);
+        $property2->setPrice(60);
+        $property2->setUser($owner);
+        $property2->addEquipment($equipement1);
+        $property2->addEquipment($equipement2);
+        $property2->setAddress($adresseProperty2);
+
+        $manager->persist($property2);
+
+        $property3 = new Property();
+
+        $property3->setBedCount(4);
+        $property3->setDescription("Freshly decorated spacious home with garden.");
+        $property3->setBedRoomCount(8);
+        $property3->setPersonCount(20);
+        $property3->setBathRoomCount(1);
+        $property3->setPrice(62);
+        $property3->setUser($owner);
+        $property3->addEquipment($equipement1);
+        $property3->addEquipment($equipement2);
+        $property3->setAddress($adresseProperty3);
+
+        $manager->persist($property3);
 
 
         $picture1= new Picture();
