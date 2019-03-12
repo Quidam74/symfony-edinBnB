@@ -1,0 +1,29 @@
+.listing {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+
+  &-div {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  &-oneProperty {
+    margin-left: 20%;
+    display: flex;
+cursor: pointer;
+  }
+  &-title {
+    font-size: 28px;
+    margin: 40px 0;
+  }
+  &-img {
+    width: 700px;
+    padding: 20px;
+  }
+  &-description {
+    font-size: 20px;
+  }
+}

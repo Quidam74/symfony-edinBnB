@@ -10,6 +10,8 @@ namespace App\DataFixtures;
 
 
 use App\Entity\Address;
+use App\Entity\Availability;
+use App\Entity\Travel;
 use App\Entity\Picture;
 use App\Entity\User;
 use App\Entity\Property;
@@ -129,7 +131,7 @@ class AllFixtures extends Fixture
 
 
         $day = new \DateTime("01-01-2019");
-
+        $jour = null;
         for ($i = 1; $i <= 365; $i++) {
             $day->modify("+1 day");
             $jour = new Day();
@@ -138,6 +140,20 @@ class AllFixtures extends Fixture
             $manager->flush();
         }
 
+        $availability = new Availability();
+
+        $availability->setDay($jour);
+        $availability->setIsAvailable(true);
+        $availability->setProperty($property);
+
+        $manager->persist($availability);
+
+        $travel = new Travel();
+        $travel->setProperty($property);
+        $travel->setUser($traveler);
+        $travel->addDay($jour);
+
+        $manager->persist($travel);
 
         $manager->flush();
     }

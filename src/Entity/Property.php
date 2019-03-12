@@ -5,6 +5,8 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PropertyRepository")
@@ -15,70 +17,102 @@ class Property
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"user", "availability", "property", "travel"})
+     * @MaxDepth(1)
      */
     private $id;
 
     /**
-         * @ORM\Column(type="text")
+     * @ORM\Column(type="text")
+     * @Groups({"property"})
+     * @MaxDepth(1)
      */
     private $description;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"property"})
+     * @MaxDepth(1)
      */
     private $price;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"property"})
+     * @MaxDepth(1)
      */
     private $bedRoomCount;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"property"})
+     * @MaxDepth(1)
      */
     private $bedCount;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"property"})
+     * @MaxDepth(1)
      */
     private $personCount;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"property"})
+     * @MaxDepth(1)
      */
     private $bathRoomCount;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Picture", mappedBy="property")
+     * @ORM\OneToMany(targetEntity="App\Entity\Picture", mappedBy="property", fetch="EAGER")
+     * @Groups({"property"})
+     * @MaxDepth(1)
      */
     private $pictures;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Address", cascade={"persist"}, fetch="EAGER")
+     * @Groups({"property"})
+     * @MaxDepth(1)
      */
     private $address;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Availability", mappedBy="property")
+     * @Groups({"property"})
+     * @MaxDepth(1)
      */
-    private $Availabilities;
+    private $availabilities;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Equipment", mappedBy="property")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Equipment")
+     * @Groups({"property"})
+     * @MaxDepth(1)
      */
     private $equipments;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(nullable=true)
+     * @Groups({"property"})
+     * @MaxDepth(1)
      */
     private $user;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Travel", mappedBy="property")
+     * @Groups({"property"})
+     * @MaxDepth(1)
+     */
+    private $travels;
 
     public function __construct()
     {
         $this->pictures = new ArrayCollection();
-        $this->Availabilities = new ArrayCollection();
+        $this->availabilities = new ArrayCollection();
         $this->equipments = new ArrayCollection();
+        $this->travels = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -206,13 +240,13 @@ class Property
      */
     public function getAvailabilities(): Collection
     {
-        return $this->Availabilities;
+        return $this->availabilities;
     }
 
     public function addAvailability(Availability $availability): self
     {
-        if (!$this->Availabilities->contains($availability)) {
-            $this->Availabilities[] = $availability;
+        if (!$this->availabilities->contains($availability)) {
+            $this->availabilities[] = $availability;
             $availability->setProperty($this);
         }
 
@@ -221,8 +255,8 @@ class Property
 
     public function removeAvailability(Availability $availability): self
     {
-        if ($this->Availabilities->contains($availability)) {
-            $this->Availabilities->removeElement($availability);
+        if ($this->availabilities->contains($availability)) {
+            $this->availabilities->removeElement($availability);
             // set the owning side to null (unless already changed)
             if ($availability->getProperty() === $this) {
                 $availability->setProperty(null);
@@ -244,7 +278,6 @@ class Property
     {
         if (!$this->equipments->contains($equipment)) {
             $this->equipments[] = $equipment;
-            $equipment->setProperty($this);
         }
 
         return $this;
@@ -254,10 +287,6 @@ class Property
     {
         if ($this->equipments->contains($equipment)) {
             $this->equipments->removeElement($equipment);
-            // set the owning side to null (unless already changed)
-            if ($equipment->getProperty() === $this) {
-                $equipment->setProperty(null);
-            }
         }
 
         return $this;
@@ -275,4 +304,34 @@ class Property
         return $this;
     }
 
+    /**
+     * @return Collection|Travel[]
+     */
+    public function getTravels(): Collection
+    {
+        return $this->travels;
+    }
+
+    public function addTravel(Travel $travel): self
+    {
+        if (!$this->travels->contains($travel)) {
+            $this->travels[] = $travel;
+            $travel->setProperty($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTravel(Travel $travel): self
+    {
+        if ($this->travels->contains($travel)) {
+            $this->travels->removeElement($travel);
+            // set the owning side to null (unless already changed)
+            if ($travel->getProperty() === $this) {
+                $travel->setProperty(null);
+            }
+        }
+
+        return $this;
+    }
 }
